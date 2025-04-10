@@ -4,5 +4,4 @@ from .forms import CrearCliente
 
 
 def index(request):
-    form = CrearCliente
-    return render(request, "index.html", { 'form' : form })
+    return render(request, "index.html")
