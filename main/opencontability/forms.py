@@ -5,3 +5,8 @@ class CrearCliente(forms.ModelForm):
     class Meta:
         model = models.Clientes
         fields = "__all__"
+
+class CrearFactura(forms.ModelForm):
+    class Meta:
+        model = models.Facturas
+        fields = ['NFactura', 'Compra_o_Venta', 'Comprobante', 'Procesamiento', 'TComprobante', 'NComprobante', 'Movimiento', 'TImputacion', 'CUIT', 'Cliente', 'Comerciante', 'Importe']
