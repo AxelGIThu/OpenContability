@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .forms import CrearCliente
+from .forms import CrearCliente, CrearFactura
 
 # Muestra los hipervinculos para las partes de la página.
 # Tendrá verificación de usuarios en un futuro
@@ -23,7 +23,15 @@ def tabla_clientes(request):
     return render(request, "tabla_clientes.html")
 
 def cargar_facturas(request):
-    return render(request, "cargar_facturas.html")
+    if request.method == "POST":
+        # Crea un objeto con los datos del formulario y lo guarda.
+        form = CrearFactura(request.POST)
+        form.save()
+        return HttpResponse("Funciono!<br><a href='cargar_facturas'>Volver</a>")
+    else:
+        # Crea un objeto con el formulario para el HTML.
+        form = CrearFactura
+    return render(request, "cargar_facturas.html", { 'form' : form })
 
 def tabla_compra_venta(request):
     return render(request, "tabla_compra_venta.html")

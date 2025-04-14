@@ -3,17 +3,27 @@ from decimal import Decimal
 
 # Create your models here.
 class Clientes(models.Model):
+    IVA_CHOICES = [
+        ('inscripto','Inscripto'),
+        ('no_inscripto','No Inscripto')
+    ]
+
     IDCliente = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=50)
     CUIT = models.CharField(max_length=11)
-    IVA = models.CharField(max_length=20)
+    IVA = models.CharField(max_length=20, choices=IVA_CHOICES)
     
     class Meta:
         db_table = 'Clientes'
 
 class Facturas(models.Model):
+    COMRPRA_O_VENTA_CHOICES = [
+        ('compra','Compra'),
+        ('venta','Venta')
+    ]
+
     NFactura = models.IntegerField(primary_key=True)
-    Compra_o_Venta = models.CharField(max_length=50)
+    Compra_o_Venta = models.CharField(max_length=6, choices=COMRPRA_O_VENTA_CHOICES)
     Comprobante = models.DateField()
     Procesamiento = models.DateField()
     TComprobante = models.CharField(max_length=100)
