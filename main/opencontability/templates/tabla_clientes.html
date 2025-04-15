@@ -1,5 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h1>Tabla Clientes</h1>
+{% if clientes.query %}
+    <table border="1">
+        <thead>
+            <td>#</td>
+            <td>Nombre</td>
+            <td>CUIT</td>
+            <td>IVA</td>
+        </thead>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.IDCliente }}</td>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.CUIT }}</td>
+            <td>{{ cliente.IVA }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No</td>
+            <td>Hay</td>
+            <td>registros</td>
+            <td>cargados.</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
     <a href="..">Volver</a>
 {% endblock  %}
