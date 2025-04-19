@@ -68,3 +68,38 @@ class Facturas(models.Model):
 
         self.Total = total
         super().save(*args, **kwargs)
+    
+    def calcular_totales(self):
+        from decimal import Decimal, ROUND_HALF_UP
+    
+        def safe_decimal(value):
+            return value if value is not None else Decimal('0.00')
+    
+        importe_total = safe_decimal(self.Importe)
+    
+        iva_rate = Decimal('0.21')
+        divisor = Decimal('1.21')
+        neto = (importe_total / divisor).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        iva = (importe_total - neto).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    
+        self.Neto21 = neto
+        self.IVA21 = iva
+    
+        self.Neto10y5 = Decimal('0.00')
+        self.IVA10y5 = Decimal('0.00')
+        self.Neto27 = Decimal('0.00')
+        self.IVA27 = Decimal('0.00')
+        self.ConceptoNoAgrabado = Decimal('0.00')
+        self.PercepcionIVA = Decimal('0.00')
+        self.PercepcionDGR = Decimal('0.00')
+        self.PercepcionMunicipalidad = Decimal('0.00')
+        self.Otros = Decimal('0.00')
+    
+        self.Total = (
+            self.Neto10y5 + self.IVA10y5 +
+            self.Neto21 + self.IVA21 +
+            self.Neto27 + self.IVA27 +
+            self.ConceptoNoAgrabado + self.PercepcionIVA +
+            self.PercepcionDGR + self.PercepcionMunicipalidad +
+            self.Otros
+        ).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
