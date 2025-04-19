@@ -1,5 +1,66 @@
 {% extends 'base.html' %}
+{% load custom_tags %}
 
 {% block content %}
+
+    <h1>Tabla Compras y Ventas</h1>
+
+    {% if facturas %}
+
+        <table>
+            <thead>
+                {% for columna in columnas %}
+                    <th>{{ columna }}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for factura in facturas %}
+                <tr>
+                    {% for columna in columnas%}    
+                            <td>{{ factura|get_attr:columna }}</td>
+                    {% endfor%}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="tabla_compra_venta">Atras</a>
+    {% else %}
+    <h2>Elija que campos quiere ver.</h2>
+    
+    <form action="tabla_compra_venta" method="post">
+
+        {% csrf_token %}
+
+        <label><input type="checkbox" name="filtro_campos" value="NFactura" checked> Numero de Factura</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Compra_o_Venta" checked> Compra o Venta</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Comprobante" checked> Comprobante</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Procesamiento" checked> Procesamiento</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="TComprobante"> Tipo de Comprobante</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="NComprobante"> Numero de Comprobante</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Movimiento"> Movimiento</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="TImputacion"> Tipo de Imputacion</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="CUIT" checked> CUIT</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Cliente" checked> Cliente</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Comerciante" checked> Comerciante</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Importe" checked> Importe</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Neto10y5"> Neto10y5</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="IVA10y5"> IVA10y5</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Neto21"> Neto21</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="IVA21"> IVA21</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Neto27"> Neto27</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="IVA27"> IVA27</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="ConceptoNoAgrabado"> Concepto No Agrabado</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="PercepcionIVA"> Percepcion IVA</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="PercepcionDGR"> Percepcion DGR</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="PercepcionMunicipalidad"> Percepcion Municipalidad</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Otros"> Otros</label><br>
+        <label><input type="checkbox" name="filtro_campos" value="Total" checked> Total</label><br><br>
+
+        <button type="submit">Mostrar Tabla</button>
+
+    </form>
+
     <a href="..">Volver</a>
+    {% endif %}
 {% endblock  %}
