@@ -4,7 +4,7 @@ from . import models
 class CrearCliente(forms.ModelForm):
     class Meta:
         model = models.Clientes
-        fields = "__all__"
+        fields = ['nombre', 'CUIT', 'IVA']
 
 class CrearFactura(forms.ModelForm):
     class Meta:

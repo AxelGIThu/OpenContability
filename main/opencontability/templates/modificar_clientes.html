@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Cargar Clientes</h1>
+
+    <form action="{% url 'modificar_clientes' cliente.IDCliente %}" method="post">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Cargar</button>
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'tabla_clientes' %}">Volver</a>
+{% endblock  %}

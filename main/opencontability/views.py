@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import CrearCliente, CrearFactura
 from .models import Clientes, Facturas
 from django.db.models import Q
@@ -65,8 +65,21 @@ def tabla_compra_venta(request):
             
     return render(request, "tabla_compra_venta.html")
 
-def modificar(request):
-    return render(request, "modificar.html")
+def modificar_clientes(request, primary_key):
+    cliente = get_object_or_404(Clientes, IDCliente=primary_key)
+    form = CrearCliente(instance=cliente)
+    
+    if request.method == 'POST':
+
+        form = CrearCliente(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('tabla_clientes')
+    return render(request, "modificar_clientes.html", { 'form' : form, 'cliente' : cliente})
+
+def modificar_facturas(request):
+    
+    return render(request, "modificar_facturas.html")
 
 def generar_archivos(request):
     return render(request, "generar_archivos.html")
