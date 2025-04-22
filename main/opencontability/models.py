@@ -4,11 +4,11 @@ from decimal import Decimal
 # Create your models here.
 class Clientes(models.Model):
     IVA_CHOICES = [
-        ('inscripto','Inscripto'),
-        ('no_inscripto','No Inscripto')
+        ('Inscripto','Inscripto'),
+        ('No inscripto','No Inscripto')
     ]
 
-    IDCliente = models.IntegerField(primary_key=True)
+    IDCliente = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50)
     CUIT = models.CharField(max_length=11)
     IVA = models.CharField(max_length=20, choices=IVA_CHOICES)

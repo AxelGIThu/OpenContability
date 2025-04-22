@@ -9,6 +9,7 @@
             <td>Nombre</td>
             <td>CUIT</td>
             <td>IVA</td>
+            <td></td>
         </thead>
         {% for cliente in clientes %}
         <tr>
@@ -16,6 +17,7 @@
             <td>{{ cliente.nombre }}</td>
             <td>{{ cliente.CUIT }}</td>
             <td>{{ cliente.IVA }}</td>
+            <td><a href="{% url 'modificar_clientes' cliente.IDCliente %}">Modificar</a></td>
         </tr>
         {% empty %}
         <tr>
