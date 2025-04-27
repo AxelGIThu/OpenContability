@@ -1,5 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <a class="anchor" href="..">Volver</a>
+    <!-- Nota: Si vas a hacer el CSS de este archivo, quitale la etiqueta <center> -->
+    <center>
+    <h1>Modulo Archivos</h1>
+
+    <section>
+        <h2>Generar Libro</h2>
+        
+        <form action="{% url 'generar_archivos' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="tipo" value="libro">
+            
+            <p>¿En que rango desea seleccionar los datos?</p><br>
+            <label for="inicio">Desde</label>
+            <input type="date" name="inicio" id="inicio">
+            <label for="inicio">Hasta</label>
+            <input type="date" name="final" id="final">
+
+            <p>¿Que nombre quiere ponerle al archivo?</p>
+            <input type="text" name="nombre">
+            
+            <button>Crear</button>
+        </form>
+
+    </section>
+
+    <section>
+        <h2>Genera un CSV</h2>
+
+        <form action="{% url 'generar_archivos' %}" method="post">
+            <input type="hidden" name="type" value="csv">
+            <h3>(En construcción...)</h3>
+        </form>
+
+    </section>
+    </center>
+    <a class="anchor" href="{% url 'index' %}">Volver</a>
 {% endblock  %}

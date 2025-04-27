@@ -34,7 +34,7 @@ class Facturas(models.Model):
     Cliente = models.CharField(max_length=150)
     Comerciante = models.CharField(max_length=150)
 
-    Importe = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+    Importe = models.DecimalField(max_digits=12, decimal_places=2, null=False)
     Neto10y5 = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     IVA10y5 = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     Neto21 = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
@@ -58,6 +58,7 @@ class Facturas(models.Model):
 
         # Calcular el total a partir de los demás campos
         total = (
+            safe_decimal(self.Importe) +
             safe_decimal(self.Neto10y5) + safe_decimal(self.IVA10y5) +
             safe_decimal(self.Neto21) + safe_decimal(self.IVA21) +
             safe_decimal(self.Neto27) + safe_decimal(self.IVA27) +
