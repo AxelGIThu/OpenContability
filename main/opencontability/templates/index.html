@@ -2,10 +2,7 @@
 
 {% block content %}
     <h1>Hipervinculos:</h1>
-    <a href="nuevo_clientes">Nuevo Clientes</a>
-    <a href="tabla_clientes">Tabla Clientes</a>
-    <a href="cargar_facturas">Cargar Facturas</a>
-    <a href="tabla_compra_venta">Tabla Compra Venta</a>
-    <a href="modificar">Modificar</a>
-    <a href="generar_archivos">Generar Archivos</a>
+    <a class="anchor" href="{% url 'clientes' %}">Clientes</a>
+    <a class="anchor" href="{% url 'facturas' %}">Facturas</a>
+    <a class="anchor" href="{% url 'generar_archivos' %}">Modulo Archivos</a>
 {% endblock  %}

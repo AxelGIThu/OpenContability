@@ -4,7 +4,7 @@
 
     <h1>Cargar Clientes</h1>
 
-    <form action="{% url 'modificar_clientes' cliente.IDCliente %}" method="post">
+    <form action="{% url 'modificar_facturas' factura.NFactura %}" method="post">
 
         {% csrf_token %}
         {{ form.as_p }}
@@ -14,5 +14,5 @@
 
     <br>
 
-    <a class="anchor" href="{% url 'tabla_clientes' %}">Volver</a>
+    <a class="anchor" href="{% url 'tabla_facturas' %}">Volver</a>
 {% endblock  %}
