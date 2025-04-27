@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Tabla Clientes</h1>
 {% if clientes.query %}
-    <table border="1">
+    <table class="clase_tabla" border="1">
         <thead>
             <td>#</td>
             <td>Nombre</td>
@@ -17,7 +17,7 @@
             <td>{{ cliente.nombre }}</td>
             <td>{{ cliente.CUIT }}</td>
             <td>{{ cliente.IVA }}</td>
-            <td><a href="{% url 'modificar_clientes' cliente.IDCliente %}">Modificar</a></td>
+            <td><a class="anchor" href="{% url 'modificar_clientes' cliente.IDCliente %}">Modificar</a></td>
         </tr>
         {% empty %}
         <tr>
@@ -30,5 +30,5 @@
     </table>
 {% endif %}
 
-    <a href="..">Volver</a>
+    <a class="anchor" href="{% url 'clientes' %}">Volver</a>
 {% endblock  %}

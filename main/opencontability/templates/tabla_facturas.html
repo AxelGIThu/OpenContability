@@ -3,11 +3,11 @@
 
 {% block content %}
 
-    <h1>Tabla Compras y Ventas</h1>
+    <h1>Tabla Facturas</h1>
 
     {% if facturas %}
 
-        <table>
+        <table class="clase_tabla" border="1">
             <thead>
                 {% for columna in columnas %}
                     <th>{{ columna }}</th>
@@ -19,16 +19,17 @@
                     {% for columna in columnas%}    
                             <td>{{ factura|get_attr:columna }}</td>
                     {% endfor%}
+                    <td><a class="anchor" href="{% url 'modificar_facturas' factura.NFactura %}">Modificar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <a href="tabla_compra_venta">Atras</a>
+        <a class="anchor" href="tabla_facturas">Atras</a>
     {% else %}
     <h2>Elija que campos quiere ver.</h2>
     
-    <form action="tabla_compra_venta" method="post">
+    <form action="tabla_facturas" method="post">
 
         {% csrf_token %}
 
@@ -61,6 +62,6 @@
 
     </form>
 
-    <a href="..">Volver</a>
+    <a class="anchor" href="{% url 'facturas' %}">Volver</a>
     {% endif %}
 {% endblock  %}

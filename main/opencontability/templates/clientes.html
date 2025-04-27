@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a class="anchor" href="{% url 'cargar_clientes' %}">Clientes</a>
+    <a class="anchor" href="{% url 'tabla_clientes' %}">Tabla Clientes</a>
+    <br>
+    <a class="anchor" href="{% url 'index' %}">Volver</a>
+{% endblock  %}

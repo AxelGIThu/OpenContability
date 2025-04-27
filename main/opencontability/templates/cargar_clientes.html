@@ -4,7 +4,7 @@
 
     <h1>Cargar Clientes</h1>
 
-    <form action="nuevo_clientes" method="post">
+    <form action="cargar_clientes" method="post">
 
         {% csrf_token %}
         {{ form.as_p }}
@@ -14,5 +14,5 @@
 
     <br>
 
-    <a href="..">Volver</a>
+    <a class="anchor" href="{% url 'clientes' %}">Volver</a>
 {% endblock  %}
