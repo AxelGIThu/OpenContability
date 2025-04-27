@@ -4,7 +4,7 @@
     
 <h1>Cargar Facturas</h1>
 
-<form action="cargar_facturas" method="post">
+<form action="{% url 'cargar_facturas' %}" method="post">
 
     {% csrf_token %}
     {{ form.as_p }}
