@@ -10,7 +10,11 @@
         
         <form action="{% url 'generar_archivos' %}" method="post">
             {% csrf_token %}
-            <input type="hidden" name="tipo" value="libro">
+            <label for="tipo">¿Que tipo de archivo desea?</label>
+            <select name="tipo" id="tipo">
+                <option value="libro">Libro</option>
+                <option value="csv">CSV</option>
+            </select>
             
             <p>¿En que rango desea seleccionar los datos?</p><br>
             <label for="inicio">Desde</label>
@@ -22,16 +26,6 @@
             <input type="text" name="nombre">
             
             <button>Crear</button>
-        </form>
-
-    </section>
-
-    <section>
-        <h2>Genera un CSV</h2>
-
-        <form action="{% url 'generar_archivos' %}" method="post">
-            <input type="hidden" name="type" value="csv">
-            <h3>(En construcción...)</h3>
         </form>
 
     </section>

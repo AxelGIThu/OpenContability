@@ -1,10 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
-import xlsxwriter.worksheet
 from .forms import CrearCliente, CrearFactura
 from .models import Clientes, Facturas
 from django.db.models import Q
-import xlsxwriter
+import xlsxwriter, csv, io
+
 
 # Muestra los hipervinculos para las partes de la página.
 # Tendrá verificación de usuarios en un futuro
@@ -120,6 +120,10 @@ def generar_archivos(request):
         datos = get_list_or_404(Facturas, Comprobante__range=[inicio, final])
 
         if tipo == 'libro':
+
+            # Crea un buffer (El objeto que luego va a crear la señal para descargar el archivo)
+            output = io.BytesIO()
+
             libro = xlsxwriter.Workbook(f'{nombre}.xlsx')
             hoja = libro.add_worksheet('Libro')
 
@@ -159,25 +163,92 @@ def generar_archivos(request):
                 hoja.write(fila, 22, dato.Otros)
                 hoja.write(fila, 23, dato.Total)
                 fila+=1
-            
-            hoja.write(fila+1, 10, 'Total')
-            hoja.write(fila+1, 11, f'=SUM(L1:L{fila})')
-            hoja.write(fila+1, 12, f'=SUM(M1:M{fila})')
-            hoja.write(fila+1, 13, f'=SUM(N1:N{fila})')
-            hoja.write(fila+1, 14, f'=SUM(O1:O{fila})')
-            hoja.write(fila+1, 15, f'=SUM(P1:P{fila})')
-            hoja.write(fila+1, 16, f'=SUM(Q1:Q{fila})')
-            hoja.write(fila+1, 17, f'=SUM(R1:R{fila})')
-            hoja.write(fila+1, 18, f'=SUM(S1:S{fila})')
-            hoja.write(fila+1, 19, f'=SUM(T1:T{fila})')
-            hoja.write(fila+1, 20, f'=SUM(U1:U{fila})')
-            hoja.write(fila+1, 21, f'=SUM(V1:V{fila})')
-            hoja.write(fila+1, 22, f'=SUM(W1:W{fila})')
-            hoja.write(fila+1, 23, f'=SUM(X1:X{fila})')
+            fila+=1
+            hoja.write(fila, 10, 'Total')
+            hoja.write(fila, 11, f'=SUM(L1:L{fila})')
+            hoja.write(fila, 12, f'=SUM(M1:M{fila})')
+            hoja.write(fila, 13, f'=SUM(N1:N{fila})')
+            hoja.write(fila, 14, f'=SUM(O1:O{fila})')
+            hoja.write(fila, 15, f'=SUM(P1:P{fila})')
+            hoja.write(fila, 16, f'=SUM(Q1:Q{fila})')
+            hoja.write(fila, 17, f'=SUM(R1:R{fila})')
+            hoja.write(fila, 18, f'=SUM(S1:S{fila})')
+            hoja.write(fila, 19, f'=SUM(T1:T{fila})')
+            hoja.write(fila, 20, f'=SUM(U1:U{fila})')
+            hoja.write(fila, 21, f'=SUM(V1:V{fila})')
+            hoja.write(fila, 22, f'=SUM(W1:W{fila})')
+            hoja.write(fila, 23, f'=SUM(X1:X{fila})')
 
             libro.close()
+
+            # Se da los valores al buffer para que este en el formato correcto y de la respuesta que descarga el archivo.
+            output.seek(0)
+            response = HttpResponse(
+                output,
+                content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            )
+            response['Content-Disposition'] = f'attachment; filename="{nombre}.xlsx"'
+            
+            return response
+        
+        else:
+
+            output = io.StringIO()
+            writer = csv.writer(output)
+
+            # Encabezado
+            columnas = ['NumFactura', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'NumComprobante', 'Movimiento', 'Tipo de Imputacion', 'CUIT', 'Cliente', 'Comerciante', 'Importe', 'Neto21', 'IVA21', 'Neto10y5', 'IVA10y5', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Total']
+            writer.writerow(columnas)
+
+            # Datos
+            for dato in datos:
+                writer.writerow([
+                    dato.NFactura,
+                    dato.Compra_o_Venta,
+                    dato.Comprobante,
+                    dato.Procesamiento,
+                    dato.TComprobante,
+                    dato.NComprobante,
+                    dato.Movimiento,
+                    dato.TImputacion,
+                    dato.CUIT,
+                    dato.Cliente,
+                    dato.Comerciante,
+                    dato.Importe,
+                    dato.Neto10y5,
+                    dato.IVA10y5,
+                    dato.Neto21,
+                    dato.IVA21,
+                    dato.Neto27,
+                    dato.IVA27,
+                    dato.ConceptoNoAgrabado,
+                    dato.PercepcionIVA,
+                    dato.PercepcionDGR,
+                    dato.PercepcionMunicipalidad,
+                    dato.Otros,
+                    dato.Total
+                ])
+
+            response = HttpResponse(
+                output.getvalue(),
+                content_type='text/csv'
+            )
+
+            response['Content-Disposition'] = f'attachment; filename="{nombre}.csv"'
+
+            return response
+
 
 
     return render(request, "generar_archivos.html")
 
 ##########################################################
+
+
+### Errores comunes al correr en maquinas nuevas ###
+
+# UnicodeDecodeError: 'utf-8' codec can't decode byte 0xab in position 96: invalid start byte
+# Falta crear la base de datos (crea una base de datos con el nombre ocDB)
+
+# UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf3 in position 85: invalid continuation byte
+# Esta mal la clave de la base de datos o el archivo setting.py
