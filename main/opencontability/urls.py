@@ -21,5 +21,7 @@ urlpatterns = [
 
     # Generar Archivos
     path("generar_archivos", views.generar_archivos, name="generar_archivos"),
+    # (Pendiente)
+    # Generar CSV
     ###########
 ]
