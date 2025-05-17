@@ -5,4 +5,8 @@
     <a class="anchor" href="{% url 'clientes' %}">Clientes</a>
     <a class="anchor" href="{% url 'facturas' %}">Facturas</a>
     <a class="anchor" href="{% url 'generar_archivos' %}">Modulo Archivos</a>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
 {% endblock  %}

@@ -1,20 +1,36 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from .forms import CrearCliente, CrearFactura
 from .models import Clientes, Facturas
 from django.db.models import Q
 import xlsxwriter, csv, io
 
 
+# Registro de usuarios
+def registro(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registro.html', {'form': form})
+
 # Muestra los hipervinculos para las partes de la página.
 # Tendrá verificación de usuarios en un futuro
+@login_required
 def index(request):
     return render(request, "index.html")
 
 ########################################################## Clientes
+@login_required
 def index_clientes(request):
     return render(request, "clientes.html")
 
+@login_required
 def cargar_clientes(request):
 
     if request.method == "POST":
@@ -29,6 +45,7 @@ def cargar_clientes(request):
 
     return render(request, "cargar_clientes.html", { 'form' : form})
 
+@login_required
 def tabla_clientes(request):
 
     clientes = Clientes.objects.all()
@@ -38,9 +55,11 @@ def tabla_clientes(request):
 ##########################################################
 
 ########################################################## Facturas
+@login_required
 def index_facturas(request):
     return render(request, "facturas.html")
 
+@login_required
 def cargar_facturas(request):
 
     if request.method == "POST":
@@ -58,6 +77,7 @@ def cargar_facturas(request):
 
     return render(request, "cargar_facturas.html", { 'form' : form })
 
+@login_required
 def tabla_facturas(request):
 
     if request.method == 'POST':
@@ -79,6 +99,7 @@ def tabla_facturas(request):
 ##########################################################
 
 ########################################################## Modificar
+@login_required
 def modificar_clientes(request, primary_key):
     cliente = get_object_or_404(Clientes, IDCliente=primary_key)
     form = CrearCliente(instance=cliente)
@@ -91,6 +112,7 @@ def modificar_clientes(request, primary_key):
             return redirect('tabla_clientes')
     return render(request, "modificar_clientes.html", { 'form' : form, 'cliente' : cliente})
 
+@login_required
 def modificar_facturas(request, primary_key):
     factura = get_object_or_404(Facturas, NFactura=primary_key)
     form = CrearFactura(instance=factura)
@@ -108,6 +130,7 @@ def modificar_facturas(request, primary_key):
 ##########################################################
 
 ########################################################## Generar Archivos
+@login_required
 def generar_archivos(request):
 
     if request.POST:
