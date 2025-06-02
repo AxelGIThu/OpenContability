@@ -1,5 +1,6 @@
 from django.db import models
 from decimal import Decimal
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Clientes(models.Model):
@@ -12,18 +13,21 @@ class Clientes(models.Model):
     nombre = models.CharField(max_length=50)
     CUIT = models.CharField(max_length=11)
     IVA = models.CharField(max_length=20, choices=IVA_CHOICES)
+
+    # Usuario propietario.
+    propietario = models.ForeignKey(User, on_delete=models.CASCADE)
     
     class Meta:
         db_table = 'Clientes'
 
 class Facturas(models.Model):
-    COMRPRA_O_VENTA_CHOICES = [
+    COMPRA_O_VENTA_CHOICES = [
         ('compra','Compra'),
         ('venta','Venta')
     ]
 
     NFactura = models.IntegerField(primary_key=True)
-    Compra_o_Venta = models.CharField(max_length=6, choices=COMRPRA_O_VENTA_CHOICES)
+    Compra_o_Venta = models.CharField(max_length=6, choices=COMPRA_O_VENTA_CHOICES)
     Comprobante = models.DateField()
     Procesamiento = models.DateField()
     TComprobante = models.CharField(max_length=100)
@@ -47,6 +51,9 @@ class Facturas(models.Model):
     PercepcionMunicipalidad = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     Otros = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
     Total = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
+
+    # Usuario propietario.
+    propietario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'Facturas'
