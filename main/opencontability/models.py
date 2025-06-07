@@ -19,6 +19,9 @@ class Clientes(models.Model):
     
     class Meta:
         db_table = 'Clientes'
+    
+    def __str__(self):
+        return f'{self.nombre}'
 
 class Facturas(models.Model):
     COMPRA_O_VENTA_CHOICES = [
@@ -34,9 +37,9 @@ class Facturas(models.Model):
     NComprobante = models.CharField(max_length=100)
     Movimiento = models.CharField(max_length=100)
     TImputacion = models.CharField(max_length=100)
-    CUIT = models.CharField(max_length=11)
-    Cliente = models.CharField(max_length=150)
-    Comerciante = models.CharField(max_length=150)
+    
+    Cliente = models.ForeignKey(Clientes, on_delete=models.CASCADE)
+    Comerciante = models.ForeignKey(Clientes, on_delete=models.CASCADE, related_name="+")
 
     Importe = models.DecimalField(max_digits=12, decimal_places=2, null=False)
     Neto10y5 = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)

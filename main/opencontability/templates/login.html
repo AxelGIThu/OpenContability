@@ -1,7 +1,36 @@
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Entrar</button>
-</form>
-<a href="{% url 'registro' %}">Registrarse</a>
+{% load static %}
+
+{% block addHeadContent %}
+<link rel="stylesheet" href="{% static 'styles/login.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="login-body">
+<section class="formulario_login">
+  <div class="container-login_izquierdo">
+    <img src="{% static 'media/oc_logo2.ico' %}" alt="Logo no encontrado.">
+    <p class="parrafo"><span>Bienvenido a tu página de contaduría</span><br>
+    La forma más simple y segura de gestionar tu contabilidad.<br>
+    Regístrate para comenzar a llevar el control de tus finanzas con eficiencia y confianza.</p>
+  </div>
+
+  <div class="container-login_derecho">
+    <h2>Login</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="container-session">
+        <button type="submit">Entrar</button>
+        <a class="contain-registrarse" href="{% url 'registro' %}">Registrarse</a>
+        <div class="Terminosycondiciones_izquierdo">
+          <a href="#">Terminos y Condiciones</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+</div>
+
+{% endblock %}

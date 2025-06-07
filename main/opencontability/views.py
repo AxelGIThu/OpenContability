@@ -1,25 +1,62 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .forms import CrearCliente, CrearFactura
+from .forms import CrearCliente, CrearFactura, CustomUserCreationForm
 from .models import Clientes, Facturas
-from django.contrib.auth.models import User
-from django.db.models import Q
 import xlsxwriter, csv, io
-from datetime import datetime
 from .funciones import is_valid_fecha
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import get_user_model
 
-# Registro de usuarios
 def registro(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
+            user = form.save(commit=False)
+            user.is_active = False  # Bloqueamos acceso hasta verificar
+            user.save()
+
+            # Generar token
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+            # Construir URL de activación
+            current_site = get_current_site(request)
+            activation_link = f"http://{current_site.domain}/activate/{uid}/{token}/"
+
+            # Enviar email
+            subject = "Activa tu cuenta"
+            message = render_to_string('activation_email.html', {
+                'user': user,
+                'activation_link': activation_link,
+            })
+            send_mail(subject, message, 'opencontability.noreply@gmail.com', [user.email])
+
+            return HttpResponse('Revisa tu email para activar tu cuenta.')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
+
     return render(request, 'registro.html', {'form': form})
+
+def activate_account(request, uidb64, token):
+    User = get_user_model()
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (User.DoesNotExist, ValueError, TypeError, OverflowError):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return HttpResponse("Cuenta activada correctamente. Ya puedes iniciar sesión.")
+    else:
+        return HttpResponse("El link de activación no es válido o ha expirado.")
 
 # Muestra los hipervinculos para las partes de la página.
 # Tendrá verificación de usuarios en un futuro

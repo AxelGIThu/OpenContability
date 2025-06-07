@@ -1,0 +1,4 @@
+django
+Psycopg2
+xlsxwriter
+python-decouple

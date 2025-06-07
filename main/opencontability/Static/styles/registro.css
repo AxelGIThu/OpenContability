@@ -1,0 +1,95 @@
+:root {
+    --negro: #f5eaea;
+    --gris-oscuro: #1c1c1c;
+    --verde: #2e7d32;
+    --azul-profundo: rgb(2, 2, 147);
+    --azul-cielo:rgb(118, 202, 255);
+    --blanco:white;
+    --blanco-piel:rgb(209, 219, 158);
+}
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+ /* background: linear-gradient(to right, rgb(249, 249, 249),rgb(186, 188, 190), rgb(240, 246, 249));*/
+    background: url('../media/contador-login-fondo.png') center center / cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+.formulario_container{
+    max-width: 50%;
+    box-shadow: 1px 1px solid rgb(0, 0, 0);
+    background-color: var(--azul-cielo);
+    border-radius: 25px;
+    padding: 20px;
+}
+.formulario_container h2{
+    font-size: 2.5rem;
+    text-align: center;
+    font-family: Arial;
+    color: #333;
+  /* Ejemplo de sombra */
+}
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.formulario_container ul{
+    margin:0;
+    text-align: left;
+    padding-left: -20px;
+
+}
+form span{
+    padding-top: 10px;
+}
+form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+    width: 100%;
+    color: var(--gris-oscuro);
+}
+
+form label {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+    text-align: left;
+}
+
+form input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    justify-items: center;
+    width: 75%;
+    box-sizing: border-box;
+}
+form button{
+    width: 60%;
+    max-width: 200px;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 2rem;
+    background-color: var(--azul-profundo);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button:hover {
+    background-color: #00006e;
+}
+.container-login{
+    text-decoration: none;
+    text-align: center;
+    color: var(--negro);
+}
