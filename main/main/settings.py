@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -79,11 +80,11 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ocDB',
-        'USER': 'postgres',
+        'NAME': config('NAME'),
+        'USER': config('USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'HOST': config('HOST'),
+        'PORT': config('PORT')
     }
 }
 
@@ -135,12 +136,18 @@ LOGOUT_REDIRECT_URL = 'login'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
+# Envio de mails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'opencontability.noreply@correo.com'
-EMAIL_HOST_PASSWORD = 'gkzybbnzpyugheop'
 EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASS')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Captcha
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_REQUIRED_SCORE = 0.85
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
