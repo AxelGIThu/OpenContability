@@ -174,3 +174,4 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
+    CSRF_TRUSTED_ORIGINS = ['https://opencontability.onrender.com']
