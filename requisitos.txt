@@ -1,5 +1,0 @@
-django
-Psycopg2
-xlsxwriter
-python-decouple
-django-recaptcha
