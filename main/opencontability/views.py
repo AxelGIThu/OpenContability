@@ -197,7 +197,7 @@ def generar_archivos(request):
                 hoja = libro.add_worksheet('Libro')
 
                 # Encabezado
-                columnas = ['NumFactura', '¿Compra o Venta?', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'NumComprobante', 'Movimiento', 'Tipo de Imputación', 'CUIT', 'Cliente', 'Comerciante', 'Importe', 'Neto10y5', 'IVA10y5', 'Neto21', 'IVA21', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Otros', 'Total']
+                columnas = ['NumFactura', '¿Compra o Venta?', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'NumComprobante', 'Movimiento', 'Tipo de Imputación', 'Cliente', 'Comerciante', 'Importe', 'Neto10y5', 'IVA10y5', 'Neto21', 'IVA21', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Otros', 'Total']
                 contador_columnas = 0
                 for columna in columnas:
                     hoja.write(0, contador_columnas, columna)
@@ -214,25 +214,26 @@ def generar_archivos(request):
                     hoja.write(fila, 5, dato.NComprobante)
                     hoja.write(fila, 6, dato.Movimiento)
                     hoja.write(fila, 7, dato.TImputacion)
-                    hoja.write(fila, 8, dato.CUIT)
-                    hoja.write(fila, 9, dato.Cliente)
-                    hoja.write(fila, 10, dato.Comerciante)
-                    hoja.write(fila, 11, dato.Importe)
-                    hoja.write(fila, 12, dato.Neto10y5)
-                    hoja.write(fila, 13, dato.IVA10y5)
-                    hoja.write(fila, 14, dato.Neto21)
-                    hoja.write(fila, 15, dato.IVA21)
-                    hoja.write(fila, 16, dato.Neto27)
-                    hoja.write(fila, 17, dato.IVA27)
-                    hoja.write(fila, 18, dato.ConceptoNoAgrabado)
-                    hoja.write(fila, 19, dato.PercepcionIVA)
-                    hoja.write(fila, 20, dato.PercepcionDGR)
-                    hoja.write(fila, 21, dato.PercepcionMunicipalidad)
-                    hoja.write(fila, 22, dato.Otros)
-                    hoja.write(fila, 23, dato.Total)
+                    # hoja.write(fila, 8, dato.CUIT)
+                    hoja.write(fila, 8, dato.Cliente.CUIT)
+                    hoja.write(fila, 9, dato.Comerciante.CUIT)
+                    hoja.write(fila, 10, dato.Importe)
+                    hoja.write(fila, 11, dato.Neto10y5)
+                    hoja.write(fila, 12, dato.IVA10y5)
+                    hoja.write(fila, 13, dato.Neto21)
+                    hoja.write(fila, 14, dato.IVA21)
+                    hoja.write(fila, 15, dato.Neto27)
+                    hoja.write(fila, 16, dato.IVA27)
+                    hoja.write(fila, 17, dato.ConceptoNoAgrabado)
+                    hoja.write(fila, 18, dato.PercepcionIVA)
+                    hoja.write(fila, 19, dato.PercepcionDGR)
+                    hoja.write(fila, 20, dato.PercepcionMunicipalidad)
+                    hoja.write(fila, 21, dato.Otros)
+                    hoja.write(fila, 22, dato.Total)
                     fila+=1
                 fila+=1
-                hoja.write(fila, 10, 'Total')
+                hoja.write(fila, 9, 'Total')
+                hoja.write(fila, 10, f'=SUM(K2:K{fila})')
                 hoja.write(fila, 11, f'=SUM(L2:L{fila})')
                 hoja.write(fila, 12, f'=SUM(M2:M{fila})')
                 hoja.write(fila, 13, f'=SUM(N2:N{fila})')
@@ -245,7 +246,6 @@ def generar_archivos(request):
                 hoja.write(fila, 20, f'=SUM(U2:U{fila})')
                 hoja.write(fila, 21, f'=SUM(V2:V{fila})')
                 hoja.write(fila, 22, f'=SUM(W2:W{fila})')
-                hoja.write(fila, 23, f'=SUM(X2:X{fila})')
 
                 libro.close()
 

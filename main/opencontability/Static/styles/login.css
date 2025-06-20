@@ -1,161 +1,186 @@
 :root {
-    --negro: #000000;
-    /* --negro: #121212; revertir */
-    --gris-oscuro: #1c1c1c;
-    --verde: #2e7d32;
-    --azul-profundo: rgb(2, 2, 147);
+  --negro: #121212;
+  --gris-oscuro: #1c1c1c;
+  --verde: #2e7d32;
+  --azul-profundo: rgb(2, 2, 147);
 }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    /* background: linear-gradient(to right, rgb(251, 247, 247),rgb(250, 247, 247), rgb(250, 247, 247)); revertir */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    /* background: url('../media/contador-login-fondo.png') center center / cover no-repeat; revertir */
-    background-color: var(--negro);
-    opacity: 2;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  background-color: var(--negro);
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
 }
 
-/* -- Sección principal del formulario -- */
 .formulario_login {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    margin: 3rem auto;
-    width: 90%;
-    max-width: 900px;
-    min-height: 75vh;
-    /* Cambiar el color de abajo a rgba(255, 255, 255, 0.47) */
-    background-color: rgba(255, 255, 255, 0.404);
-    border-radius: 0.8rem;
-    box-shadow: 0.5px 1px 2px 2px rgba(0, 0, 0, 0.541);
-    padding: 1rem;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 900px;
+  background-color: rgba(178, 255, 184, 0.404);
+  border-radius: 0.8rem;
+  box-shadow: 0.5px 1px 2px 2px rgba(0, 0, 0, 0.541);
+  padding: 1rem;
+  gap: 1rem;
 }
 
 .container-login_izquierdo,
 .container-login_derecho {
-    width: 50%;
-    box-sizing: border-box;
-}
-
-/* -- Lado izquierdo con bienvenida -- */
-.container-login_izquierdo {
-    max-width:100%;
-    padding: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.47);
-    padding: 2rem;
-    border-radius: 25px;
-    flex-direction: column;
+  width: 50%;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.414);
+  border-radius: 25px;
+  box-sizing: border-box;
 }
 
 .titulo {
-    font-size: 2.5rem;
-    text-align: center;
-    font-family: Arial;
-    color: #333;
-    text-shadow: 2px 2px 2px rgba(52, 52, 52, 0.615); /* Ejemplo de sombra */
-}
-.parrafo {
-    font-size: 1.3rem;
-    text-align: start;
-    font-family: Arial;
-    color: #333;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ejemplo de sombra */
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--negro);
+  text-shadow: 2px 2px 8px var(--negro);
 }
 
-/* -- Lado derecho con login -- */
-.container-login_derecho {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.47);
-    padding: 2rem;
-    border-radius: 25px;
+.parrafo {
+  font-size: 1.3rem;
+  color:var(--negro);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
 h2 {
-    padding-bottom: 20px;
-    text-align: center;
-    color: rgb(81, 81, 81);
-    font-size: 2rem;
+  padding-bottom: 20px;
+  text-align: center;
+  color:var(--negro);
+  font-size: 2rem;
+  text-shadow: 2px 2px 8px var(--negro);
 }
 
-/* -- Estilos para los campos del formulario (as_p) -- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
 form p {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.2rem;
-    width: 100%;
-    color: var(--gris-oscuro);
+  margin: 0;
+  color: var(--gris-oscuro);
 }
 
 form label {
-    font-size: 1.3rem;
-    margin-bottom: 0.4rem;
-    text-align: left;
+  font-size: 1.2rem;
 }
 
 form input {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid #ccc;
-    width: 100%;
-    box-sizing: border-box;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* -- Botones y sección inferior -- */
 .container-session {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 button {
-    width: 60%;
-    max-width: 200px;
-    padding: 10px;
-    font-size: 1.1rem;
-    border-radius: 2rem;
-    background-color: var(--azul-profundo);
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  background-color: var(--azul-profundo);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
 button:hover {
-    background-color: #00006e;
+  background-color: #00006e;
 }
+
 .contain-registrarse {
-    display: block;
-    text-align: center;
-    padding: 10px 20px;
-    border-radius: 2rem;
-    font-size: 1.1rem;
-    background-color: var(--gris-oscuro);
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  background-color: var(--gris-oscuro);
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
+
 .contain-registrarse:hover {
-    background-color: #333;
+  background-color: #333;
 }
-.Terminosycondiciones_izquierdo {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    text-align: center;
-    text-decoration: none;
-    color:var(--gris-oscuro);
+
+.Terminosycondiciones_izquierdo a {
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--negro);
+  text-decoration: none;
+}
+.Terminosycondiciones_izquierdo a:hover{
+text-decoration: underline solid;
+color: #00006e;
+}
+/* Responsivo */
+@media (max-width: 768px) {
+  .formulario_login {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .container-login_izquierdo,
+  .container-login_derecho {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .titulo {
+    font-size: 2rem;
+  }
+
+  .parrafo {
+    font-size: 1.1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  button,
+  .contain-registrarse {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo {
+    font-size: 1.6rem;
+  }
+
+  .parrafo {
+    font-size: 1rem;
+  }
+
+  form label {
+    font-size: 1rem;
+  }
+
+  button,
+  .contain-registrarse {
+    font-size: 1rem;
+  }
 }

@@ -25,9 +25,12 @@ SECRET_KEY = config('DJANGO_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = False
+if config('ENVIROMENT') == 'DESARROLLO':
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = ['opencontability.onrender.com']
+ALLOWED_HOSTS = ['opencontability.onrender.com', 'www.opencontability.onrender.com', '127.0.0.1']
 
 
 # Application definition
@@ -79,26 +82,27 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-import dj_database_url
+if config('ENVIROMENT') == 'DESARROLLO':
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('NAME'),
+            'USER': config('USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('HOST'),
+            'PORT': config('PORT')
+        }
+    }
+else:
+    import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('NAME'),
-#         'USER': config('USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('HOST'),
-#         'PORT': config('PORT')
-#     }
-# }
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL'),
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
 
 
 # Password validation
@@ -175,4 +179,9 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
     CSRF_TRUSTED_ORIGINS = ['https://opencontability.onrender.com']
+
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True

@@ -1,0 +1,537 @@
+:root {
+  --color-fondo: linear-gradient(135deg, #012C40, #005C63, #008793);
+  --color-texto: #000000;
+  --color-barra-lateral: rgb(1, 81, 81);
+  --color-texto-menu: #ffffff;
+  --color-boton: #000000;
+  --color-boton-texto: #ffffff;
+  --color-menu-hover: #ffffff;
+  --color-menu-hover-texto: #000000;
+  --color-linea: #ffffff;
+  --color-switch-base: #595a59;
+  --color-switch-circulo: #ffffff;
+  --color-scroll: #c0c0c0;
+  --color-scroll-hover: #868686;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--color-fondo);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+  color: var(--color-texto);
+  overflow: hidden;
+}
+
+body.modo-oscuro {
+  --color-fondo: #121212;
+  --color-texto: #ffffff;
+  --color-barra-lateral: #2c2d31;
+  --color-texto-menu: #bcbcbc;
+  --color-boton: #000000;
+  --color-boton-texto: #ffffff;
+  --color-menu-hover: #000000;
+  --color-menu-hover-texto: #eeeeee;
+  --color-linea: #ffffff;
+  --color-switch-base: #27cd40;
+  --color-switch-circulo: #ffffff;
+  --color-scroll: #44454a;
+  --color-scroll-hover: #555555;
+}
+
+/* Scroll personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-scroll);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-scroll-hover);
+}
+
+/* Transición suave */
+body, body * {
+  transition: all 0.3s ease;
+}
+
+/* Estilos generales */
+.barra_lateral {
+  background-color: var(--color-barra-lateral);
+  color: var(--color-texto);
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  padding: 20px;
+}
+
+.modo-oscuro .barra_lateral {
+  background-color: var(--color-barra-lateral);
+}
+
+/* Modo oscuro aplica a todos los elementos */
+body.modo-oscuro * {
+  color: var(--color-texto);
+  background-color: transparent;
+  border-color: var(--color-linea);
+}
+
+body.modo-oscuro input,
+body.modo-oscuro textarea,
+body.modo-oscuro select,
+body.modo-oscuro button {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+/* Switch visual */
+.base {
+  background-color: var(--color-switch-base);
+  border-radius: 50px;
+  width: 35px;
+  height: 20px;
+  position: relative;
+  cursor: pointer;
+}
+
+.circulo {
+  background-color: var(--color-switch-circulo);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: left 0.3s ease;
+}
+
+.circulo.prendido {
+  left: 18px;
+}
+
+/* Bienvenida */
+.bienvenida {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.bienvenida h1 {
+  font-size: 3rem;
+  color: rgb(255, 255, 255);
+}
+
+.bienvenida h1 span {
+  color: #ffea74;
+}
+.bienvenida img{
+  border-radius: 5px;
+}
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+.menu {
+  background-color: var(--color-boton);
+  color: var(--color-boton-texto);
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  display: none;
+  justify-content: start;
+  align-items:flex-start;
+  border-radius: 50%;
+  cursor: pointer;
+  right:15px;
+  top: 15px;
+  z-index:100;
+}
+
+/* Barra lateral */
+.barra_lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px; /* ancho normal más estrecho */
+  height: 100vh;
+  background-color: var(--color-barra-lateral);
+  color: var(--color-texto);
+  padding: 20px 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.4s ease;
+  z-index: 100;
+}
+
+/* Mini barra lateral */
+.barra_lateral.mini-barra-lateral {
+  width: 70px; /* bastante compacta */
+}
+
+/* Nombre página con texto y icono */
+.nombre_pagina {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.nombre_pagina ion-icon {
+  color: rgb(245, 244, 244);
+  font-size: 2rem;
+}
+
+.nombre_pagina span {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgb(210, 210, 210);
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.barra_lateral.mini-barra-lateral .nombre_pagina span {
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  overflow: hidden;
+}
+#cloud {
+  font-size: 24px;
+}
+
+/* Botón toggle */
+#toggle-btn {
+  background-color: var(--color-barra-lateral);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  align-self: flex-start;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#toggle-btn.rotado {
+  transform: rotate(180deg);
+}
+
+/* Navegación */
+.barra_lateral .navegacion {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.barra_lateral .navegacion::-webkit-scrollbar {
+  width: 5px;
+}
+
+.barra_lateral .navegacion::-webkit-scrollbar-thumb {
+  background-color: var(--color-scroll);
+  border-radius: 5px;
+}
+
+.barra_lateral .navegacion::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-scroll-hover);
+}
+
+.barra_lateral .navegacion .nav_clientes {
+  margin-top: 25px;
+}
+
+.barra_lateral .navegacion li {
+  list-style: none;
+  margin-bottom: 7px;
+}
+
+.barra_lateral .navegacion a {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content:left;
+  text-decoration: none;
+  border-radius: 10px;
+  color: var(--color-texto-menu);
+}
+
+.barra_lateral .navegacion a:hover {
+  background-color: var(--color-menu-hover);
+  color: var(--color-menu-hover-texto);
+}
+
+.barra_lateral.mini-barra-lateral .nombre_pagina span,
+.barra_lateral.mini-barra-lateral .navegacion span, 
+.barra_lateral.mini-barra-lateral .usuario_logeado span {
+  display: none;
+}
+
+.barra_lateral.mini-barra-lateral li {
+  justify-content: center;
+}
+
+.barra_lateral .linea {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-linea);
+  margin-top: 15px;
+}
+
+/* Modo oscuro */
+.barra_lateral .modo-oscuro {
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.barra_lateral .modo-oscuro .info {
+  width: 150px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  color: var(--color-texto-menu);
+  overflow: hidden;
+}
+
+.barra_lateral .modo-oscuro ion-icon {
+  width: 50px;
+  font-size: 20px;
+}
+
+/* Switch */
+.barra_lateral .modo-oscuro .switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  height: 45px;
+}
+
+.barra_lateral .modo-oscuro .base {
+  position: relative;
+  width: 35px;
+  height: 20px;
+  border-radius: 50px;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+  background-color: white;
+}
+
+.circulo {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: left 0.3s ease;
+  background-color: rgb(0, 255, 17);
+}
+
+.circulo.prendido {
+  left: 18px;
+  background-color: rgb(0, 255, 17);
+}
+
+.usuario_logeado {
+  margin-top: auto;
+  padding: 5px;
+  color: var(--color-texto-menu);
+  border-radius: 10px;
+  max-height: 200px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.usuario_logeado ul {
+  list-style: none;
+  padding: 0;
+}
+
+.usuario_logeado li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.usuario_logeado li ion-icon {
+  font-size: 2rem;
+  min-width: 2rem;
+}
+
+.usuario_logeado li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  color: var(--color-texto-menu);
+  text-decoration: none;
+}
+
+#inbox {
+  background-color: var(--color-menu-hover);
+  color: var(--color-menu-hover-texto);
+}
+
+main {
+  margin-left: 300px;
+  padding: 20px;
+  transition: margin-left 0.5s ease;
+}
+
+main.min-main {
+  margin-left: 100px;
+}
+
+@media(max-height: 660px) {
+  .barra_lateral .nombre_pagina {
+    margin-bottom: 5px;
+  }
+  .barra_lateral .modo-oscuro {
+    margin-bottom: 3px;
+  }
+}
+
+@media (max-width: 600px) {
+  .barra_lateral {
+    position: absolute;
+    left: -300px;
+  }
+  .max.barra_lateral {
+    left: 0;
+  }
+  .menu {
+    display: flex;
+  }
+  .menu ion-icon:nth-child(2) {
+    display: none;
+  }
+  .main {
+    margin-left: 0;
+  }
+  main.min-main {
+    margin-left: 0;
+  }
+  .max-barra_lateral {
+    left: 0 !important;
+  }
+}
+
+.contenedor {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.sidebar {
+  width: 70px;
+  background-color: #004d47;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.slider-box {
+  flex-grow: 1;
+}
+
+.caja-deslizante {
+  width: 100%;
+  height: 100%;
+}
+
+.slider-list {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  animation: slide 15s infinite linear;
+}
+
+.slider-item {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.slider-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.slider-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-200%); }
+}
+.barra_lateral.mini-barra-lateral .sub-menu {
+  height: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none; /* No permite interacción */
+}
+.sub-menu {
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: height 0.3s ease, padding 0.3s ease;
+}
+.sub-menu .sub-menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-texto-menu);
+  text-decoration: none;
+  margin-left:20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sub-menu .sub-menu-link:hover {
+  background-color: var(--color-menu-hover);
+  color: var(--color-menu-hover-texto);
+}
+
+.sub-menu::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 0.07rem;
+  left: 0.9rem; /* mejor que margin-left */
+  background-color: var(--color-boton-texto);
+}
+ul{
+  margin-bottom: 20px;
+}

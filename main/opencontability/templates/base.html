@@ -1,20 +1,117 @@
-{% load static %}
 
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
-    <link rel="icon" href="{% static 'media/oc_logo2.ico' %}" type="image/x-icon" />
-    {% block addHeadContent %}
-    
-    {% endblock %}
-    <title>OpenContability</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenContability</title>
+  
+  <!-- Fuentes y estilos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+  <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
 </head>
 <body>
+<main>
     {% block content %}
-        Contenido
+        <div class="bienvenida">
+        <h1>Bienvenido a <span>OpenContability</span></h1>
+        <img src="{% static 'media/oc_logo.ico' %}" alt="">
+        </div>
     {% endblock %}
+</main>
+
+  <!-- Íconos de menú móviles -->
+  <div class="menu">
+    <ion-icon id="open-menu-btn" name="menu"></ion-icon>
+    <ion-icon id="close-menu-btn" name="close-circle"></ion-icon>
+  </div>
+
+  <!-- Barra lateral -->
+  <div class="barra_lateral mini-barra-lateral">
+    <div class="nombre_pagina">
+      <ion-icon id="cloud" name="calculator" style="font-size: 2rem;"></ion-icon>
+      <span>OpenContability</span>
+    </div>
+
+   <nav class="navegacion">
+  <ul class="nav_clientes">
+    <li class="menu-item-dropdown">
+      <a class="anchor" href="#">
+        <ion-icon name="person-add" style="font-size: 1.5rem;"></ion-icon>
+        <span>Clientes</span>
+        <ion-icon name="arrow-dropdown"></ion-icon>
+      </a>
+      <ul class="sub-menu">
+        <li><a href="{% url 'cargar_clientes' %}" class="sub-menu-link">Cargar Clientes</a></li>
+        <li><a href="{% url 'tabla_clientes' %}" class="sub-menu-link">Tabla de Clientes</a></li>
+      </ul>
+    </li>
+
+    <li class="menu-item-dropdown">
+      <a class="anchor" href="#">
+        <ion-icon name="filing" style="font-size: 1.5rem;"></ion-icon>
+        <span>Facturas</span>
+        <ion-icon name="arrow-dropdown"></ion-icon>
+      </a>
+      <ul class="sub-menu">
+        <li><a href="{% url 'cargar_facturas' %}" class="sub-menu-link">Cargar Facturas</a></li>
+        <li><a href="{% url 'tabla_facturas' %}" class="sub-menu-link">Tabla Facturas</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a class="anchor" href="{% url 'generar_archivos' %}">
+        <ion-icon name="folder" style="font-size: 1.5rem;"></ion-icon>
+        <span>Generar Archivos</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
+    <div class="linea"></div>
+
+    <div class="modo-oscuro">
+      <div class="info">
+        <ion-icon name="moon" style="font-size: 1.5rem;"></ion-icon>
+        <span>Modo Oscuro</span>
+      </div>
+      <div class="switch">
+        <div class="base">
+          <div class="circulo"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="usuario_logeado">
+      <ul>
+        <li>
+          <ion-icon name="contact"></ion-icon>
+          <span>Usuario: {{ user.username }}</span>
+        </li>
+          <li>
+          <a class="anchor" href="{% url 'login' %}">
+            <ion-icon name="log-in"></ion-icon>
+            <span>Cierre de Sesión</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <button id="toggle-btn">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </div>
+
+  <!-- Contenido principal -->
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="{% static 'javascript/menu.js' %}"></script>
 </body>
 </html>
