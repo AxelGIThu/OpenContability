@@ -1,4 +1,3 @@
-/* Fuente moderna (puede usarse con import desde Google Fonts si querés) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 body {
@@ -13,6 +12,7 @@ body {
     color: #333;
     transition: background 0.3s, color 0.3s;
 }
+
 body:not(.modo-oscuro) {
     background: linear-gradient(to right, #496e7c, #364855);
     color: #333;
@@ -22,6 +22,7 @@ body.modo-oscuro {
     background: #121212;
     color: #e0e0e0;
 }
+
 .container-formulario_cargarclientes {
     background-color: white;
 }
@@ -36,6 +37,7 @@ body.modo-oscuro .container-formulario_cargarclientes button {
     background-color: white;
     color: #000000;
 }
+
 h1 {
     margin-top: 40px;
     color: white;
@@ -44,68 +46,46 @@ h1 {
     text-align: center;
 }
 
-.container-formulario_cargarclientes {
-    background-color: white;
-    padding: 40px 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 500px;
-    margin-top: 20px;
-
+/* Tabla */
+.clase_tabla {
+    background-color: #0088d691;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 1px 1px 1px 3px rgba(0, 0, 0, 0.767);
+    border-color: #000000;
 }
 
-.container-formulario_cargarclientes p {
-    margin-bottom: 20px;
-}
-
-.container-formulario_cargarclientes label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #000000;
-}
-
-.container-formulario_cargarclientes input,
-.container-formulario_cargarclientes select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-.container-formulario_cargarclientes input:focus,
-.container-formulario_cargarclientes select:focus {
-    border-color: #3498db;
-    outline: none;
-}
-
-button {
-    width: 100%;
-    background-color: #3498db;
+body.modo-oscuro .clase_tabla {
+    background-color: #000000;
     color: white;
-    border: none;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    font-family: 'poppins',sans-serif;
 }
 
-button:hover {
-    background-color: #2980b9;
+.clase_tabla thead {
+    border-radius: 10px;
 }
 
-/* Navegación volver */
-.navegacion-volver_container {
-    margin-top: 20px;
+.clase_tabla tr {
+    background-color: #006f83;
 }
 
+body:not(.modo-oscuro) .clase_tabla tr {
+    background-color: #000000;
+}
+
+.clase_tabla td {
+    background-color: #e0f0ff;
+    color: #000000;
+    border-radius: 5px;
+    padding: 10px;
+}
+body.modo-oscuro .clase_tabla td {
+    background-color: #000000;
+    color: wheat;
+    border-radius: 5px;
+}
+
+
+/* Botón o enlace */
 .anchor {
     background-color: #00ce56da;
     padding: 4px 10px;

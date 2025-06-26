@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 :root {
   --color-fondo: linear-gradient(135deg, #012C40, #005C63, #008793);
   --color-texto: #000000;
@@ -16,7 +17,7 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--color-fondo);
   background-size: 400% 400%;
   animation: gradientBG 10s ease infinite;
@@ -160,7 +161,7 @@ body.modo-oscuro button {
   position: fixed;
   top: 0;
   left: 0;
-  width: 220px; /* ancho normal más estrecho */
+  width: 300px; /* ancho normal más estrecho */
   height: 100vh;
   background-color: var(--color-barra-lateral);
   color: var(--color-texto);
@@ -388,15 +389,30 @@ body.modo-oscuro button {
   background-color: var(--color-menu-hover);
   color: var(--color-menu-hover-texto);
 }
-
 main {
-  margin-left: 300px;
+  margin-left: 220px; /* ← Igual al ancho normal de la barra lateral */
   padding: 20px;
-  transition: margin-left 0.5s ease;
+  transition: margin-left 0.4s ease;
+  min-height: 100vh;
+  background-color: transparent; /* o el color que uses de fondo */
 }
 
+/* cuando se minimiza la barra lateral */
 main.min-main {
-  margin-left: 100px;
+  margin-left: 70px; /* ← Igual al ancho reducido */
+}
+@media (max-width: 600px) {
+  main {
+    margin-left: 0 !important;
+  }
+
+  .max-barra_lateral ~ main {
+    margin-left: 220px !important;
+  }
+
+  main.min-main {
+    margin-left: 70px !important;
+  }
 }
 
 @media(max-height: 660px) {

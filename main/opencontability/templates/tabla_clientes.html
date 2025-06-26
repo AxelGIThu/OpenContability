@@ -1,16 +1,29 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
+{% block title %}OpenContability - CargarClientes{% endblock %}
+<title>OpenContability - Tabla Clientes</title>
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'styles/tabla_clientes.css' %}">
+    <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+{% endblock %}
+
+<body>
 {% block content %}
     <h1>Tabla Clientes</h1>
-{% if clientes.query %}
-    <table class="clase_tabla" border="1">
+
+    {% if clientes.query %}
+    <table class="clase_tabla" border="4">
         <thead>
-            <td>#</td>
-            <td>Nombre</td>
-            <td>CUIT</td>
-            <td>IVA</td>
-            <td></td>
+            <tr>
+                <td>#</td>
+                <td>Nombre</td>
+                <td>CUIT</td>
+                <td>IVA</td>
+            </tr>
         </thead>
+        <tbody>
         {% for cliente in clientes %}
         <tr>
             <td>{{ cliente.IDCliente }}</td>
@@ -27,8 +40,10 @@
             <td>cargados.</td>
         </tr>
         {% endfor %}
+        </tbody>
     </table>
-{% endif %}
+    {% endif %} 
 
-    <a class="anchor" href="{% url 'clientes' %}">Volver</a>
-{% endblock  %}
+{% endblock %}
+</body>
+</html>
