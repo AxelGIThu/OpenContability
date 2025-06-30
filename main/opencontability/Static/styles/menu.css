@@ -385,7 +385,11 @@ body.modo-oscuro button {
 }
 main {
   margin-left: 220px; /* ← Igual al ancho normal de la barra lateral */
+<<<<<<< HEAD
   padding: 10px;
+=======
+  padding: 20px;
+>>>>>>> 669c66d538c12a7d8397fa8241fb5f965bc7a236
   transition: margin-left 0.4s ease;
   min-height: 100vh;
   background-color: transparent; /* o el color que uses de fondo */
@@ -537,6 +541,7 @@ main.min-main {
 ul{
   margin-bottom: 20px;
 }
+<<<<<<< HEAD
 /* Botón o enlace Navegación Barra Lateral */
 .anchor {
   background-color:#355d3f;
@@ -560,3 +565,5 @@ ul{
 .anchor:hover {
   background-color: #2aa15cda;
 }
+=======
+>>>>>>> 669c66d538c12a7d8397fa8241fb5f965bc7a236

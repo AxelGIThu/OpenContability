@@ -1,22 +1,27 @@
 /* Fuente moderna (puede usarse con import desde Google Fonts si querés) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  color: var(--color-texto);
-  background-color: #355d3f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #0023bd, #006f83);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+}
+body:not(.modo-oscuro) {
+    background: linear-gradient(to right, #496e7c, #364855);
+    color: #333;
 }
 
 body.modo-oscuro {
-  background-color: #121212;
-  color: #e0e0e0;
+    background: #121212;
+    color: #e0e0e0;
 }
-
 .container-formulario_cargarclientes {
     background-color: white;
 }
@@ -78,55 +83,39 @@ h1 {
     outline: none;
 }
 
-form button {
-  background-color: #355d3f;
-  color: white;
-  border: none;
-  border-radius: 7px;
-  padding: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-family: 'Poppins', sans-serif;
-  margin-top: 14px;
-  width: 100%;
+button {
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    font-family: 'poppins',sans-serif;
 }
 
-form button:hover {
-  background-color:#174223;
+button:hover {
+    background-color: #2980b9;
 }
-form button:active {
-  background-color: #1a7f3cda;
-}
-body.modo-oscuro form button {
-  background-color: #ffffffda;
-  color: rgb(0, 0, 0);
-}
+
 /* Navegación volver */
 .navegacion-volver_container {
     margin-top: 20px;
 }
 
-/* Botón o enlace Navegación Barra Lateral */
 .anchor {
-  background-color:#355d3f;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  border-radius: 7px;
-  padding:6px 12px;
-  transition: background-color 0.3s;
+    background-color: #00ce56da;
+    padding: 4px 10px;
+    text-decoration: none;
+    color: rgb(122, 122, 122);
+    font-weight: bold;
+    border-radius: 7px;
+    transition: background-color 0.3s;
 }
-/* Submenú */
-.sub-menu-link{
-  background-color:#67AB78;
-  text-decoration: none;
-  color: white;
-  margin-top:5px;
-  border-radius: 7px;
-  padding:6px;
-  transition: background-color 0.3s;
-}
+
 .anchor:hover {
-  background-color: #2aa15cda;
+    background-color: #2aa15cda;
 }
