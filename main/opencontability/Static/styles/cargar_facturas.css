@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+  --color-fondo-claro: rgb(2, 2, 80);
+  --color-texto-claro: #333;
+  --color-fondo-oscuro: #121212;
+  --color-texto-oscuro: #e0e0e0;
+  --color-formulario-claro: #ffffff;
+  --color-formulario-oscuro: #1e1e1e;
+  --color-label-oscuro: #ffffff;
+  --color-btn-oscuro-hover: #fffbfb;
+  --color-btn-oscuro-hover-text: #000000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--color-fondo-claro);
+  color: var(--color-texto-claro);
+}
+
+body.modo-oscuro {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto-oscuro);
+}
+
+/* Estilo del contenedor del formulario */
+.container-formulario_cargarclientes {
+  background-color: var(--color-formulario-claro);
+}
+
+body.modo-oscuro .container-formulario_cargarclientes {
+  background-color: var(--color-formulario-oscuro);
+}
+
+body.modo-oscuro .container-formulario_cargarclientes label {
+  color: var(--color-label-oscuro);
+}
+
+body.modo-oscuro .container-formulario_cargarclientes button {
+  background-color: white;
+  color: black;
+}
+
+/* Título */
+h1 {
+  color: white;
+  font-size: 36px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  line-height: 20px;
+}
+
+/* Caja principal de carga de facturas */
+.cargar-facturas {
+  background-color: rgb(1, 2, 92);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
+  padding: 2px;
+  border-radius: 10px;
+  width:800px;
+}
+
+body.modo-oscuro .cargar-facturas {
+  background-color: rgb(255, 255, 255);
+}
+
+.cargar-facturas p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 0;
+}
+.cargar-facturas label {
+  width: 50%;
+  text-align: left;
+  margin-left: 1.5rem;
+  font-size: 0.9rem;
+  color: rgb(255, 255, 255);
+}
+body.modo-oscuro .cargar-facturas label {
+  color: rgb(0, 0, 0);
+}
+
+.cargar-facturas input,
+.cargar-facturas textarea {
+  width: 50%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.cargar-facturas select {
+  width:55%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Botón centrado */
+.centrar_boton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.centrar_boton button {
+  padding: 10px;
+  width: 100%;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.centrar_boton button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.modo-oscuro .centrar_boton button:hover {
+  background-color: var(--color-btn-oscuro-hover);
+  color: var(--color-btn-oscuro-hover-text);
+}
+
+/* Botón o enlace Navegación Barra Lateral */
+.anchor {
+  background-color:#355d3f;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
+  padding:6px 12px;
+  transition: background-color 0.3s;
+}
+/* Submenú */
+.sub-menu-link{
+  background-color:#67AB78;
+  text-decoration: none;
+  color: white;
+  margin-top:5px;
+  border-radius: 7px;
+  padding:6px;
+  transition: background-color 0.3s;
+}
+.anchor:hover {
+  background-color: #2aa15cda;
+}
+
+/* Formulario en grid */
+.grid-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.grid-form p {
+  margin: 0.5rem;
+}
+.grid-form label {
+  font-size: 1.2rem;
+}

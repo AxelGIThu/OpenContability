@@ -1,4 +1,132 @@
-body{
-    background: linear-gradient(to right, rgb(17, 17, 255),rgb(71, 129, 255),rgb(46, 134, 234));
-    color:wheat;
+/* Fuente moderna (puede usarse con import desde Google Fonts si querés) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  color: var(--color-texto);
+  background-color: #355d3f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.modo-oscuro {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.container-formulario_cargarclientes {
+    background-color: white;
+}
+
+body.modo-oscuro .container-formulario_cargarclientes {
+    background-color: #1e1e1e;
+}
+body.modo-oscuro .container-formulario_cargarclientes label {
+    color: #ffffff;
+}
+body.modo-oscuro .container-formulario_cargarclientes button {
+    background-color: white;
+    color: #000000;
+}
+h1 {
+    margin-top: 40px;
+    color: white;
+    font-size: 36px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.container-formulario_cargarclientes {
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+
+}
+
+.container-formulario_cargarclientes p {
+    margin-bottom: 20px;
+}
+
+.container-formulario_cargarclientes label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.container-formulario_cargarclientes input,
+.container-formulario_cargarclientes select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.container-formulario_cargarclientes input:focus,
+.container-formulario_cargarclientes select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+form button {
+  background-color: #355d3f;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 14px;
+  width: 100%;
+}
+
+form button:hover {
+  background-color:#174223;
+}
+form button:active {
+  background-color: #1a7f3cda;
+}
+body.modo-oscuro form button {
+  background-color: #ffffffda;
+  color: rgb(0, 0, 0);
+}
+/* Navegación volver */
+.navegacion-volver_container {
+    margin-top: 20px;
+}
+
+/* Botón o enlace Navegación Barra Lateral */
+.anchor {
+  background-color:#355d3f;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
+  padding:6px 12px;
+  transition: background-color 0.3s;
+}
+/* Submenú */
+.sub-menu-link{
+  background-color:#67AB78;
+  text-decoration: none;
+  color: white;
+  margin-top:5px;
+  border-radius: 7px;
+  padding:6px;
+  transition: background-color 0.3s;
+}
+.anchor:hover {
+  background-color: #2aa15cda;
 }

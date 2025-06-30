@@ -1,17 +1,23 @@
-{% extends 'base.html' %}
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}OpenContability - CargarClientes{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'styles/cargar_clientes.css' %}">
+<link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+{% endblock %}
 
 {% block content %}
-    <h1>Cargar Clientes</h1>
-
-    <form action="cargar_clientes" method="post">
-
+<h1>Cargar Clientes</h1>
+<div class="container-formulario_cargarclientes">
+    <form action="{% url 'cargar_clientes' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button>Cargar</button>
-
+        <button class="container-formulario_cargarclientes-button">Cargar</button>
     </form>
-
-    <br>
-
-    <a class="anchor" href="{% url 'clientes' %}">Volver</a>
+</div>
 {% endblock %}
+</body>
+</html>

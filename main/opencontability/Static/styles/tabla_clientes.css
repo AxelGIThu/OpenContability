@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  color: var(--color-texto);
+  background-color: #355d3f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.modo-oscuro {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.container-formulario_cargarclientes {
+    background-color: white;
+}
+
+body.modo-oscuro .container-formulario_cargarclientes {
+    background-color: #1e1e1e;
+}
+body.modo-oscuro .container-formulario_cargarclientes label {
+    color: #ffffff;
+}
+body.modo-oscuro .container-formulario_cargarclientes button {
+    background-color: white;
+    color: #000000;
+}
+
+h1 {
+    margin-top: 40px;
+    color: white;
+    font-size: 36px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* Tabla */
+.clase_tabla {
+    background-color: #204b2bbb;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 1px 1px 1px 3px rgba(0, 0, 0, 0.767);
+    border-color: #000000;
+}
+
+body.modo-oscuro .clase_tabla {
+    background-color: #000000;
+    color: white;
+}
+
+.clase_tabla thead {
+    border-radius: 10px;
+}
+
+.clase_tabla tr {
+    background-color: #006f83;
+}
+
+body:not(.modo-oscuro) .clase_tabla tr {
+    background-color: #000000;
+}
+
+.clase_tabla td {
+    background-color: #e0f0ff;
+    color: #000000;
+    border-radius: 5px;
+    padding: 10px;
+}
+body.modo-oscuro .clase_tabla td {
+    background-color: #000000;
+    color: wheat;
+    border-radius: 5px;
+}
+
+/* Botón o enlace Navegación Barra Lateral */
+.anchor {
+  background-color:#355d3f;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
+  padding:6px 12px;
+  transition: background-color 0.3s;
+}
+/* Submenú */
+.sub-menu-link{
+  background-color:#67AB78;
+  text-decoration: none;
+  color: white;
+  margin-top:5px;
+  border-radius: 7px;
+  padding:6px;
+  transition: background-color 0.3s;
+}
+.anchor:hover {
+  background-color: #2aa15cda;
+}

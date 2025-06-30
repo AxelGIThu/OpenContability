@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 :root {
-  --color-fondo: linear-gradient(135deg, #012C40, #005C63, #008793);
+    --color-fondo: #355d3f;
+
   --color-texto: #000000;
   --color-barra-lateral: rgb(1, 81, 81);
   --color-texto-menu: #ffffff;
@@ -16,7 +18,7 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--color-fondo);
   background-size: 400% 400%;
   animation: gradientBG 10s ease infinite;
@@ -53,7 +55,7 @@ body.modo-oscuro {
 
 /* Transición suave */
 body, body * {
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 /* Estilos generales */
@@ -160,7 +162,7 @@ body.modo-oscuro button {
   position: fixed;
   top: 0;
   left: 0;
-  width: 220px; /* ancho normal más estrecho */
+  width: 300px; /* ancho normal más estrecho */
   height: 100vh;
   background-color: var(--color-barra-lateral);
   color: var(--color-texto);
@@ -230,19 +232,12 @@ body.modo-oscuro button {
 }
 
 /* Navegación */
+.barra_lateral {
+  overflow-x: hidden !important;
+}
+
 .barra_lateral .navegacion {
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.barra_lateral .navegacion::-webkit-scrollbar {
-  width: 5px;
-}
-
-.barra_lateral .navegacion::-webkit-scrollbar-thumb {
-  background-color: var(--color-scroll);
-  border-radius: 5px;
+  overflow-x: hidden !important;
 }
 
 .barra_lateral .navegacion::-webkit-scrollbar-thumb:hover {
@@ -350,11 +345,11 @@ body.modo-oscuro button {
 }
 
 .usuario_logeado {
-  margin-top: auto;
   padding: 5px;
   color: var(--color-texto-menu);
   border-radius: 10px;
   max-height: 200px;
+  width: 90%;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -388,15 +383,30 @@ body.modo-oscuro button {
   background-color: var(--color-menu-hover);
   color: var(--color-menu-hover-texto);
 }
-
 main {
-  margin-left: 300px;
-  padding: 20px;
-  transition: margin-left 0.5s ease;
+  margin-left: 220px; /* ← Igual al ancho normal de la barra lateral */
+  padding: 10px;
+  transition: margin-left 0.4s ease;
+  min-height: 100vh;
+  background-color: transparent; /* o el color que uses de fondo */
 }
 
+/* cuando se minimiza la barra lateral */
 main.min-main {
-  margin-left: 100px;
+  margin-left: 70px; /* ← Igual al ancho reducido */
+}
+@media (max-width: 600px) {
+  main {
+    margin-left: 0 !important;
+  }
+
+  .max-barra_lateral ~ main {
+    margin-left: 220px !important;
+  }
+
+  main.min-main {
+    margin-left: 70px !important;
+  }
 }
 
 @media(max-height: 660px) {
@@ -438,14 +448,6 @@ main.min-main {
   height: 100vh;
   width: 100vw;
 }
-
-.sidebar {
-  width: 70px;
-  background-color: #004d47;
-  height: 100vh;
-  flex-shrink: 0;
-}
-
 .slider-box {
   flex-grow: 1;
 }
@@ -534,4 +536,27 @@ main.min-main {
 }
 ul{
   margin-bottom: 20px;
+}
+/* Botón o enlace Navegación Barra Lateral */
+.anchor {
+  background-color:#355d3f;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
+  padding:6px 12px;
+  transition: background-color 0.3s;
+}
+/* Submenú */
+.sub-menu-link{
+  background-color:#67AB78;
+  text-decoration: none;
+  color: white;
+  margin-top:5px;
+  border-radius: 7px;
+  padding:6px;
+  transition: background-color 0.3s;
+}
+.anchor:hover {
+  background-color: #2aa15cda;
 }
