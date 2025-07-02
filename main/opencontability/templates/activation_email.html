@@ -1,15 +1,3 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenContability - Confirmar-Cuenta</title>
-    <link rel="stylesheet" href="{% static 'styles/cargar_clientes.css' %}">
-    <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
-</head>
-<body>
-
 Hola {{ user.username }}.
 
 Gracias por registrarte. Para activar tu cuenta, haz clic en el siguiente enlace:
@@ -19,6 +7,3 @@ Gracias por registrarte. Para activar tu cuenta, haz clic en el siguiente enlace
 Si no creaste esta cuenta, puedes ignorar este mensaje.
 
 Atentamente, Tu equipo de soporte.
-<a class="anchor" href="{% url 'login' %}"></a>
-</body>
-</html>
