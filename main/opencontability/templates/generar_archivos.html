@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
+{% load custom_tags %}
+{% block title %}OpenContability -Generar Archivos{% endblock %}
+{% load static %}
 
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'styles/generar_archivo.css' %}">
+    <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+{% endblock %}
 {% block content %}
     <!-- Nota: Si vas a hacer el CSS de este archivo, quitale la etiqueta <center> -->
-    <center>
-    <h1>Modulo Archivos</h1>
-
-    <section>
+    <h1>Modulo Archivos:</h1>
         <h2>Generar Libro</h2>
-        
+    <section class="generar-archivos_container">
+        <div class="centrar-formulario_container">
         <form action="{% url 'generar_archivos' %}" method="post">
             {% csrf_token %}
             <label for="tipo">¿Que tipo de archivo desea?</label>
@@ -15,20 +20,15 @@
                 <option value="libro">Libro</option>
                 <option value="csv">CSV</option>
             </select>
-            
-            <p>¿En que rango desea seleccionar los datos?</p><br>
-            <label for="inicio">Desde</label>
+            <p>¿En que rango desea seleccionar los datos?<br>
+            <label for="inicio">Desde:</label>
             <input type="date" name="inicio" id="inicio">
             <label for="inicio">Hasta</label>
-            <input type="date" name="final" id="final">
-
-            <p>¿Que nombre quiere ponerle al archivo?</p>
-            <input type="text" name="nombre">
-            
+            <input type="date" name="final" id="final"></p>
+            <p>¿Que nombre quiere ponerle al archivo?
+            <input type="text" name="nombre"></p>
             <button>Crear</button>
         </form>
-
+        </div>
     </section>
-    </center>
-    <a class="anchor" href="{% url 'index' %}">Volver</a>
 {% endblock  %}

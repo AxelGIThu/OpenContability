@@ -14,6 +14,14 @@ class CrearFactura(forms.ModelForm):
     class Meta:
         model = models.Facturas
         fields = ['NFactura', 'Compra_o_Venta', 'Comprobante', 'Procesamiento', 'TComprobante', 'NComprobante', 'Movimiento', 'TImputacion', 'Cliente', 'Comerciante', 'Importe']
+        
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        
+        # Filtramos las opciones de Cliente y Comerciante por el usuario actual
+        self.fields['Cliente'].queryset = models.Clientes.objects.filter(propietario=user)
+        self.fields['Comerciante'].queryset = models.Clientes.objects.filter(propietario=user)
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text='Requerido. Introduce una dirección válida.')

@@ -5,8 +5,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OpenContability</title>
-  
+  <title>{% block title %}OpenContability{% endblock %}</title>
+
   <!-- Fuentes y estilos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,10 @@
   <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
   <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+
+  {% block head_extra %}{% endblock %}
 </head>
+
 <body>
 <main>
     {% block content %}
@@ -70,7 +73,14 @@
         <span>Generar Archivos</span>
       </a>
     </li>
-  </ul>
+  
+  <li>
+  <a class="anchor" href="{% url 'index' %}">
+    <ion-icon name="home" style="font-size: 1.5rem;"></ion-icon>
+    <span>Inicio</span>
+  </a>
+</li>
+</ul>
 </nav>
 
 
@@ -103,9 +113,6 @@
       </ul>
     </div>
 
-    <button id="toggle-btn">
-      <ion-icon name="menu"></ion-icon>
-    </button>
   </div>
 
   <!-- Contenido principal -->

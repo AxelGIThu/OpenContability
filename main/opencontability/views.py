@@ -117,7 +117,7 @@ def cargar_facturas(request):
     
     else:
         # Crea un objeto con el formulario para el HTML.
-        form = CrearFactura()
+        form = CrearFactura(user=request.user)
 
     return render(request, "cargar_facturas.html", { 'form' : form })
 
@@ -265,36 +265,41 @@ def generar_archivos(request):
                 writer = csv.writer(output)
 
                 # Encabezado
-                columnas = ['NumFactura', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'NumComprobante', 'Movimiento', 'Tipo de Imputacion', 'CUIT', 'Cliente', 'Comerciante', 'Importe', 'Neto21', 'IVA21', 'Neto10y5', 'IVA10y5', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Total']
+                # columnas = ['NumFactura', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'NumComprobante', 'Movimiento', 'Tipo de Imputacion', 'CUIT', 'Cliente', 'Comerciante', 'Importe', 'Neto21', 'IVA21', 'Neto10y5', 'IVA10y5', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Total']
+                columnas = ['CUIT', 'NumComprobante', 'Tipo de Comprobante', 'Comprobante', 'Importe']
                 writer.writerow(columnas)
 
                 # Datos
                 for dato in datos:
                     writer.writerow([
-                        dato.NFactura,
-                        dato.Compra_o_Venta,
-                        dato.Comprobante,
-                        dato.Procesamiento,
-                        dato.TComprobante,
+                        dato.Cliente.CUIT,
                         dato.NComprobante,
-                        dato.Movimiento,
-                        dato.TImputacion,
-                        dato.CUIT,
-                        dato.Cliente,
-                        dato.Comerciante,
-                        dato.Importe,
-                        dato.Neto10y5,
-                        dato.IVA10y5,
-                        dato.Neto21,
-                        dato.IVA21,
-                        dato.Neto27,
-                        dato.IVA27,
-                        dato.ConceptoNoAgrabado,
-                        dato.PercepcionIVA,
-                        dato.PercepcionDGR,
-                        dato.PercepcionMunicipalidad,
-                        dato.Otros,
-                        dato.Total
+                        dato.TComprobante,
+                        dato.Comprobante,
+                        dato.Importe
+                        # dato.NFactura,
+                        # dato.Compra_o_Venta,
+                        # dato.Comprobante,
+                        # dato.Procesamiento,
+                        # dato.TComprobante,
+                        # dato.NComprobante,
+                        # dato.Movimiento,
+                        # dato.TImputacion,
+                        # dato.Cliente.CUIT,
+                        # dato.Comerciante.CUIT,
+                        # dato.Importe,
+                        # dato.Neto10y5,
+                        # dato.IVA10y5,
+                        # dato.Neto21,
+                        # dato.IVA21,
+                        # dato.Neto27,
+                        # dato.IVA27,
+                        # dato.ConceptoNoAgrabado,
+                        # dato.PercepcionIVA,
+                        # dato.PercepcionDGR,
+                        # dato.PercepcionMunicipalidad,
+                        # dato.Otros,
+                        # dato.Total
                     ])
 
                 response = HttpResponse(

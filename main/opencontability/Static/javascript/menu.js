@@ -7,6 +7,7 @@ const circulo = document.querySelector(".circulo");
 const menu = document.querySelector(".menu");
 const main = document.querySelector("main");
 const submenuItems = document.querySelectorAll('.menu-item-dropdown');
+const iconoCalculadora = document.getElementById("cloud"); // NUEVO
 
 // Submenús desplegables
 const subMenus = document.querySelectorAll('.menu-item-dropdown');
@@ -28,7 +29,8 @@ subMenus.forEach((menuItem) => {
     }
   });
 });
-// Menú móvil
+
+// Menú móvil - botón de las tres barritas
 menu.addEventListener("click", () => {
   barra.classList.toggle("max-barra_lateral");
 
@@ -49,12 +51,23 @@ menu.addEventListener("click", () => {
   }
 });
 
+// NUEVO: Menú con el ícono de calculadora
+iconoCalculadora.addEventListener("click", () => {
+  barra.classList.toggle("mini-barra-lateral");
+  toggleBtn.classList.toggle("rotado");
+  main.classList.toggle("min-main");
+
+  spans.forEach((span) => {
+    span.classList.toggle("oculto");
+  });
+});
 // Palanca de modo oscuro
 palanca.addEventListener("click", () => {
   document.body.classList.toggle("modo-oscuro");
   circulo.classList.toggle("prendido");
 });
-// Minimizar barra lateral
+
+// Minimizar barra lateral con el botón toggle
 toggleBtn.addEventListener("click", () => {
   barra.classList.toggle("mini-barra-lateral");
   toggleBtn.classList.toggle("rotado");

@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  color: var(--color-texto);
+  background-color: #355d3f;
+}
+
+body.modo-oscuro {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+h1 {
+  color: white;
+  font-size: 28px;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  margin-top: 5px;
+}
+
+h2 {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.generar-archivos_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 15px;
+}
+
+.centrar-formulario_container {
+  background-color: #f8f8f8;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+}
+
+body.modo-oscuro .centrar-formulario_container {
+  background-color: #1e1e1e;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #000;
+}
+
+body.modo-oscuro form {
+  color: #fff;
+}
+
+form p label {
+  font-weight: bold;
+  margin-top: 12px;
+}
+form input,
+form select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+body.modo-oscuro input,
+body.modo-oscuro select {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #888;
+  font-family: 'Poppins', sans-serif;
+}
+
+form button {
+  background-color: #355d3f;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 14px;
+}
+
+form button:hover {
+  background-color:#174223;
+}
+form button:active {
+  background-color: #1a7f3cda;
+}
+body.modo-oscuro form button {
+  background-color: #ffffffda;
+  color: rgb(0, 0, 0);
+}
+/* Botón o enlace Navegación Barra Lateral */
+.anchor {
+  background-color:#355d3f;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 7px;
+  padding:6px 12px;
+  transition: background-color 0.3s;
+}
+/* Submenú */
+.sub-menu-link{
+  background-color:#67AB78;
+  text-decoration: none;
+  color: white;
+  margin-top:5px;
+  border-radius: 7px;
+  padding:6px;
+  transition: background-color 0.3s;
+}
+.anchor:hover {
+  background-color: #2aa15cda;
+}

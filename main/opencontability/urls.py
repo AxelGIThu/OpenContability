@@ -23,7 +23,6 @@ urlpatterns = [
     path("clientes/cargar_clientes", views.cargar_clientes, name="cargar_clientes"),
     path("clientes/tabla_clientes", views.tabla_clientes, name="tabla_clientes"),
     path("clientes/tabla_clientes/modificar_clientes/<int:primary_key>", views.modificar_clientes, name="modificar_clientes"),
-    ##########
 
     # Facturas
     path("facturas", views.index_facturas, name="facturas"),
@@ -34,7 +33,5 @@ urlpatterns = [
 
     # Generar Archivos
     path("generar_archivos", views.generar_archivos, name="generar_archivos"),
-    # (Pendiente)
-    # Generar CSV
     ###########
 ]
