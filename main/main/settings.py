@@ -25,7 +25,7 @@ SECRET_KEY = config('DJANGO_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-if config('ENVIROMENT') == 'DESARROLLO':
+if config('ENVIRONMENT', default='DESARROLLO') == 'DESARROLLO':
     DEBUG = True
 else:
     DEBUG = False
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if config('ENVIROMENT') == 'DESARROLLO':
+if config('ENVIRONMENT') == 'DESARROLLO':
         DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -176,7 +176,7 @@ RECAPTCHA_REQUIRED_SCORE = 0.85
 
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
-if not DEBUG:
+if DEBUG == False:
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
     SECURE_SSL_REDIRECT = True
