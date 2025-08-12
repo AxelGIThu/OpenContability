@@ -106,7 +106,7 @@ def cargar_facturas(request):
 
     if request.method == "POST":
         # Crea un objeto con los datos del formulario y lo guarda.
-        form = CrearFactura(request.POST)
+        form = CrearFactura(request.POST, user=request.user)
         if form.is_valid():
             factura = form.save(commit=False)
             factura.calcular_totales()
