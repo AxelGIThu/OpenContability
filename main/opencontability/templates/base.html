@@ -1,124 +1,186 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{% block title %}OpenContability{% endblock %}</title>
 
-  <!-- Fuentes y estilos -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+  <!-- Fuentes e íconos -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
-  <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+  <link rel="icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
 
   {% block head_extra %}{% endblock %}
 </head>
+<body class="{% if request.COOKIES.modo_oscuro == '1' %}modo-oscuro{% endif %}">
 
-<body>
-<main>
-    {% block content %}
-        <div class="bienvenida">
-        <h1>Bienvenido a <span>OpenContability</span></h1>
-        <img src="{% static 'media/oc_logo.ico' %}" alt="">
-        </div>
-    {% endblock %}
-</main>
-
-  <!-- Íconos de menú móviles -->
-  <div class="menu">
-    <ion-icon id="open-menu-btn" name="menu"></ion-icon>
-    <ion-icon id="close-menu-btn" name="close-circle"></ion-icon>
-  </div>
-
-  <!-- Barra lateral -->
-  <div class="barra_lateral mini-barra-lateral">
-    <div class="nombre_pagina">
-      <ion-icon id="cloud" name="calculator" style="font-size: 2rem;"></ion-icon>
-      <span>OpenContability</span>
-    </div>
-
-   <nav class="navegacion">
-  <ul class="nav_clientes">
-    <li class="menu-item-dropdown">
-      <a class="anchor" href="#">
-        <ion-icon name="person-add" style="font-size: 1.5rem;"></ion-icon>
-        <span>Clientes</span>
-        <ion-icon name="arrow-dropdown"></ion-icon>
-      </a>
-      <ul class="sub-menu">
-        <li><a href="{% url 'cargar_clientes' %}" class="sub-menu-link">Cargar Clientes</a></li>
-        <li><a href="{% url 'tabla_clientes' %}" class="sub-menu-link">Tabla de Clientes</a></li>
-      </ul>
-    </li>
-
-    <li class="menu-item-dropdown">
-      <a class="anchor" href="#">
-        <ion-icon name="filing" style="font-size: 1.5rem;"></ion-icon>
-        <span>Facturas</span>
-        <ion-icon name="arrow-dropdown"></ion-icon>
-      </a>
-      <ul class="sub-menu">
-        <li><a href="{% url 'cargar_facturas' %}" class="sub-menu-link">Cargar Facturas</a></li>
-        <li><a href="{% url 'tabla_facturas' %}" class="sub-menu-link">Tabla Facturas</a></li>
-      </ul>
-    </li>
-
-    <li>
-      <a class="anchor" href="{% url 'generar_archivos' %}">
-        <ion-icon name="folder" style="font-size: 1.5rem;"></ion-icon>
-        <span>Generar Archivos</span>
-      </a>
-    </li>
-  
-  <li>
-  <a class="anchor" href="{% url 'index' %}">
-    <ion-icon name="home" style="font-size: 1.5rem;"></ion-icon>
-    <span>Inicio</span>
-  </a>
-</li>
-</ul>
-</nav>
-
-
-    <div class="linea"></div>
-
-    <div class="modo-oscuro">
-      <div class="info">
-        <ion-icon name="moon" style="font-size: 1.5rem;"></ion-icon>
-        <span>Modo Oscuro</span>
+  <div class="app-wrapper">
+    <!-- SIDEBAR -->
+    <aside class="barra_lateral" id="sidebar" role="navigation" aria-label="Barra lateral principal">
+      <div class="nombre_pagina">
+        <ion-icon id="cloud" name="calculator"></ion-icon>
+        <span>OpenContability</span>
       </div>
-      <div class="switch">
-        <div class="base">
-          <div class="circulo"></div>
-        </div>
-      </div>
-    </div>
 
-    <div class="usuario_logeado">
-      <ul>
-        <li>
-          <ion-icon name="contact"></ion-icon>
-          <span>Usuario: {{ user.username }}</span>
-        </li>
+      <nav class="navegacion" aria-label="Navegación principal">
+        <ul class="nav_clientes">
+          <li class="menu-item-dropdown">
+            <a class="anchor" href="#" aria-expanded="false">
+              <ion-icon name="person-add"></ion-icon><span>Clientes</span>
+              <ion-icon name="chevron-down" style="margin-left:auto; font-size:1rem;"></ion-icon>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="{% url 'cargar_clientes' %}" class="sub-menu-link">Cargar Clientes</a></li>
+              <li><a href="{% url 'tabla_clientes' %}" class="sub-menu-link">Tabla de Clientes</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-item-dropdown">
+            <a class="anchor" href="#" aria-expanded="false">
+              <ion-icon name="filing"></ion-icon><span>Facturas</span>
+              <ion-icon name="chevron-down" style="margin-left:auto; font-size:1rem;"></ion-icon>
+            </a>
+            <ul class="sub-menu">
+              <li><a href="{% url 'cargar_facturas' %}" class="sub-menu-link">Cargar Facturas</a></li>
+              <li><a href="{% url 'tabla_facturas' %}" class="sub-menu-link">Tabla Facturas</a></li>
+            </ul>
+          </li>
+
           <li>
-          <a class="anchor" href="{% url 'login' %}">
-            <ion-icon name="log-in"></ion-icon>
-            <span>Cierre de Sesión</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+            <a class="anchor" href="{% url 'generar_archivos' %}">
+              <ion-icon name="folder"></ion-icon><span>Generar Archivos</span>
+            </a>
+          </li>
 
+          <li>
+            <a class="anchor" href="{% url 'index' %}">
+              <ion-icon name="home"></ion-icon><span>Inicio</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="linea" aria-hidden="true"></div>
+
+      <!-- modo oscuro -->
+      <div class="modo-oscuro" style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+        <div class="info" style="display:flex;align-items:center;gap:10px;">
+          <ion-icon name="moon"></ion-icon><span>Modo oscuro</span>
+        </div>
+        <div class="switch" style="margin-left:auto;">
+          <button id="dark-toggle" aria-pressed="false" title="Activar modo oscuro" style="background:none;border:none;color:inherit;cursor:pointer;">
+            <div class="base" style="display:inline-block;padding:0"><div class="circulo"></div></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- usuario -->
+      <div class="usuario_logeado" role="contentinfo">
+        <ul>
+          <li><ion-icon name="contact"></ion-icon><span>Usuario: {{ user.username }}</span></li>
+          <li>
+            <!-- <a class="anchor" href="{% url 'logout' %}">
+              <ion-icon name="log-out"></ion-icon><span>Cerrar sesión</span>
+            </a> -->
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <ion-icon name="log-out"></ion-icon><span><button type="submit">Cerrar sesión</button></span>
+            </form>
+          </li>
+        </ul>
+      </div>
+
+      <!-- collapse button -->
+      <button id="sidebar-toggle" aria-label="Colapsar menú">
+        <ion-icon name="arrow-round-back"></ion-icon><span class="hidden-xs">Colapsar</span>
+      </button>
+    </aside>
+
+    <!-- MAIN -->
+    <main id="main-content">
+      {% block content %}
+      <div class="bienvenida">
+        <h1>Bienvenido a <span class="title-main">OpenContability</span></h1>
+        <img src="{% static 'media/oc_logo.ico' %}" alt="Logo OpenContability">
+      </div>
+      {% endblock %}
+    </main>
   </div>
 
-  <!-- Contenido principal -->
-
-  <!-- Scripts -->
+  <!-- Ionicons + script funcional -->
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-  <script src="{% static 'javascript/menu.js' %}"></script>
+
+  <script>
+    /* Funcionalidad del sidebar / submenus / modo oscuro */
+    (function(){
+      const sidebar = document.getElementById('sidebar');
+      const main = document.getElementById('main-content');
+      const toggle = document.getElementById('sidebar-toggle');
+      const darkBtn = document.getElementById('dark-toggle');
+
+      // Restaurar estado collapsed desde localStorage
+      if (localStorage.getItem('oc_sidebar_collapsed') === '1') {
+        sidebar.classList.add('collapsed');
+        main.classList.add('collapsed');
+      }
+
+      // Toggle collapsed (desktop)
+      toggle.addEventListener('click', () => {
+        const isCollapsed = sidebar.classList.toggle('collapsed');
+        main.classList.toggle('collapsed');
+        localStorage.setItem('oc_sidebar_collapsed', isCollapsed ? '1' : '0');
+      });
+
+      // Submenu accordion
+      document.querySelectorAll('.menu-item-dropdown').forEach(li => {
+        const a = li.querySelector('a');
+        a.addEventListener('click', (ev) => {
+          // solo para desplegar, prevenir enlace por defecto
+          ev.preventDefault();
+          const open = li.classList.toggle('open');
+          a.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+
+      // Modo oscuro persistente
+      const applyDark = (on) => {
+        if(on){
+          document.body.classList.add('modo-oscuro');
+          darkBtn.setAttribute('aria-pressed','true');
+          localStorage.setItem('oc_dark', '1');
+        } else {
+          document.body.classList.remove('modo-oscuro');
+          darkBtn.setAttribute('aria-pressed','false');
+          localStorage.setItem('oc_dark', '0');
+        }
+      };
+      // estado inicial
+      const savedDark = localStorage.getItem('oc_dark');
+      if(savedDark === '1') applyDark(true);
+
+      darkBtn.addEventListener('click', () => applyDark(!document.body.classList.contains('modo-oscuro')));
+
+      // Mobile: close sidebar when clicking outside
+      document.addEventListener('click', (e) => {
+        if(window.innerWidth <= 900){
+          if(sidebar.classList.contains('visible-mobile') && !sidebar.contains(e.target) && !e.target.closest('#open-menu-btn')){
+            sidebar.classList.remove('visible-mobile');
+          }
+        }
+      });
+
+      // OPTIONAL: expose function to toggle from other controls
+      window.toggleModoOscuro = function(){ applyDark(!document.body.classList.contains('modo-oscuro')); };
+
+      // If you want to open sidebar from a mobile button elsewhere, add:
+      // document.getElementById('open-menu-btn')?.addEventListener('click', ()=> sidebar.classList.toggle('visible-mobile'));
+    })();
+  </script>
+
+  {% block scripts %}{% endblock %}
 </body>
 </html>

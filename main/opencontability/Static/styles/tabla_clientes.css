@@ -1,149 +1,174 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-<<<<<<< HEAD
-body {
+
+:root {
+  --bg: #355d3f;
+  --bg-dark: #121212;
+  --card: #ffffff;
+  --card-dark: #1e1e1e;
+  --text: #111827;
+  --text-dark: #e0e0e0;
+  --accent: #2aa15c;
+  --accent-2: #06b4d3;
+  --muted: rgba(0,0,0,0.08);
+  --radius: 12px;
+  --gap: 16px;
+  --shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-  min-height: 100vh;
-  color: var(--color-texto);
-  background-color: #355d3f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-
-body.modo-oscuro {
-  background-color: #121212;
-  color: #e0e0e0;
-=======
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #0023bd, #006f83);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    color: #333;
-    transition: background 0.3s, color 0.3s;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
 }
 
-body:not(.modo-oscuro) {
-    background: linear-gradient(to right, #496e7c, #364855);
-    color: #333;
+/* Scrollbar */
+body::-webkit-scrollbar { width: 12px; }
+body::-webkit-scrollbar-thumb {
+  background-color: #2aa15cda;
+  border-radius: 10px;
 }
 
+/* Modo oscuro */
 body.modo-oscuro {
-    background: #121212;
-    color: #e0e0e0;
->>>>>>> 669c66d538c12a7d8397fa8241fb5f965bc7a236
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
 
-.container-formulario_cargarclientes {
-    background-color: white;
+/* Contenedor */
+.page-wrap {
+  width: 90%;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: var(--card);
 }
 
-body.modo-oscuro .container-formulario_cargarclientes {
-    background-color: #1e1e1e;
-}
-body.modo-oscuro .container-formulario_cargarclientes label {
-    color: #ffffff;
-}
-body.modo-oscuro .container-formulario_cargarclientes button {
-    background-color: white;
-    color: #000000;
+body.modo-oscuro .page-wrap {
+  background: var(--card-dark);
 }
 
-h1 {
-    margin-top: 40px;
-    color: white;
-    font-size: 36px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    text-align: center;
+/* Título */
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 }
 
 /* Tabla */
 .clase_tabla {
-<<<<<<< HEAD
-    background-color: #204b2bbb;
-=======
-    background-color: #0088d691;
->>>>>>> 669c66d538c12a7d8397fa8241fb5f965bc7a236
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 1px 1px 1px 3px rgba(0, 0, 0, 0.767);
-    border-color: #000000;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
 }
 
-body.modo-oscuro .clase_tabla {
-    background-color: #000000;
-    color: white;
+.clase_tabla caption {
+  font-size: 1rem;
+  text-align: left;
+  font-weight: 600;
+  margin: 10px 0;
+  color: var(--text-dark);
 }
 
-.clase_tabla thead {
-    border-radius: 10px;
+/* Encabezados */
+.clase_tabla thead th.thead-unido {
+  background: #000;
+  color: #fff;
+  padding: 14px;
+  text-align: center;
+  font-size: 1.05rem;
 }
 
-.clase_tabla tr {
-    background-color: #006f83;
+.clase_tabla thead th {
+  background: #000;
+  color: #fff;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
 }
 
-body:not(.modo-oscuro) .clase_tabla tr {
-    background-color: #000000;
+/* Filas */
+.clase_tabla tbody tr {
+  background: #f8f9fa;
+  transition: background 0.3s ease;
+}
+
+.clase_tabla tbody tr:hover {
+  background: #e8f5e9;
 }
 
 .clase_tabla td {
-    background-color: #e0f0ff;
-    color: #000000;
-    border-radius: 5px;
-    padding: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
 }
+
+/* Modo oscuro */
+body.modo-oscuro .clase_tabla tbody tr {
+  background: #2b2b2b;
+}
+
 body.modo-oscuro .clase_tabla td {
-    background-color: #000000;
-    color: wheat;
-    border-radius: 5px;
+  color: #ffffff;
+  border-color: rgba(255,255,255,0.08);
 }
 
-<<<<<<< HEAD
-/* Botón o enlace Navegación Barra Lateral */
-.anchor {
-  background-color:#355d3f;
+/* Primera columna */
+.clase_tabla td:nth-child(1) {
+  font-weight: 700;
+  width: 64px;
+}
+
+/* Botón de acción */
+.action-link {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
   text-decoration: none;
+  background-color: var(--accent);
   color: white;
-  font-weight: bold;
-  border-radius: 7px;
-  padding:6px 12px;
-  transition: background-color 0.3s;
-}
-/* Submenú */
-.sub-menu-link{
-  background-color:#67AB78;
-  text-decoration: none;
-  color: white;
-  margin-top:5px;
-  border-radius: 7px;
-  padding:6px;
-  transition: background-color 0.3s;
-}
-.anchor:hover {
-  background-color: #2aa15cda;
-}
-=======
-
-/* Botón o enlace */
-.anchor {
-    background-color: #00ce56da;
-    padding: 4px 10px;
-    text-decoration: none;
-    color: rgb(122, 122, 122);
-    font-weight: bold;
-    border-radius: 7px;
-    transition: background-color 0.3s;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.anchor:hover {
-    background-color: #2aa15cda;
+.action-link:hover {
+  background: #2d8a46;
 }
->>>>>>> 669c66d538c12a7d8397fa8241fb5f965bc7a236
+
+/* Dark mode botones */
+body.modo-oscuro .action-link {
+  background: gray;
+  color: #fff;
+}
+
+body.modo-oscuro .action-link:hover {
+  background: #444;
+}
+
+/* Empty row */
+.empty-row td {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-wrap { padding: 10px; }
+  .page-title { font-size: 1.5rem; }
+  .clase_tabla { font-size: 0.9rem; }
+  .clase_tabla thead th, .clase_tabla td { padding: 10px; }
+}

@@ -1,23 +1,40 @@
-
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}OpenContability - CargarClientes{% endblock %}
+{% block title %}OpenContability - Cargar Clientes{% endblock %}
 
 {% block head_extra %}
 <link rel="stylesheet" href="{% static 'styles/cargar_clientes.css' %}">
 <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+<script src="{% static 'javascript/cargar_clientes.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
-<h1>Cargar Clientes</h1>
-<div class="container-formulario_cargarclientes">
+  <h1>Cargar Clientes</h1>
+
+  <!-- TOASTS -->
+  <div class="contenedor-toast" id="contenedor-toast">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="toast autoCierre {{ message.tags }}">
+          <div class="contenido">
+            <div class="icono campana-animada">🔔</div>
+            <div><p class="titulo">{{ message }}</p></div>
+          </div>
+          <button class="btn-cerrar" onclick="cerrarToast(this)">
+            <span class="icono">✖</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- FORM -->
+  <div class="container-formulario_cargarclientes">
     <form action="{% url 'cargar_clientes' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="container-formulario_cargarclientes-button">Cargar</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="container-formulario_cargarclientes-button">Cargar</button>
     </form>
-</div>
+  </div>
 {% endblock %}
-</body>
-</html>
