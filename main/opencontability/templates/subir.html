@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subir Imagen OCR</title>
+</head>
+<body>
+   <h2>Subir factura para OCR</h2>
+<form method="post" enctype="multipart/form-data" action="{% url 'ocr' %}">
+    {% csrf_token %}
+    <input type="file" name="imagen" accept="image/*" required>
+    <button type="submit">Procesar OCR</button>
+</form>
+
+</body>
+</html>

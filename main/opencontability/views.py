@@ -295,3 +295,111 @@ def generar_archivos(request):
 
 # UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf3 in position 85: invalid continuation byte
 # Esta mal la clave de la base de datos o el archivo setting.py
+
+import os
+import re
+from django.shortcuts import render
+from django.http import JsonResponse
+from .services import procesar_ocr_api
+
+
+
+
+def normalizar_importe(importe_str):
+    if not importe_str:
+        return None
+    limpio = importe_str.replace(".", "").replace(",", ".")
+    return limpio
+
+
+
+
+
+def extraer_numero_factura(texto):
+    match = re.search(r"Nro\.?\s*Comp[:\s-]*([0-9]{4}-[0-9]{8})", texto, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+    return None
+
+
+
+def extraer_fecha_emision(texto):
+    match = re.search(
+        r"Fecha\s+de\s+Emisi[oó]n[:\s-]*([0-9]{2}[/-][0-9]{2}[/-][0-9]{4})",
+        texto,
+        re.IGNORECASE
+    )
+    return match.group(1).strip() if match else None
+
+
+
+def extraer_importe_total(texto):
+    """
+    Busca el campo 'Importe Total' en el texto del OCR
+    y devuelve solo el último número que aparece después.
+    """
+    lineas = texto.splitlines()
+    # Encontrar la línea que contiene "Importe Total"
+    for i, linea in enumerate(lineas):
+        if "Importe Total" in linea:
+            # Tomar todas las líneas siguientes
+            siguientes = lineas[i+1:i+10]  # mira las próximas 10 líneas por si hay saltos
+            numeros = []
+            for lin in siguientes:
+                numeros += re.findall(r"[\d\.,]+", lin)
+            if numeros:
+                # Tomamos solo el último número como Importe Total real
+                return normalizar_importe(numeros[-1])
+    return None
+
+
+
+
+def ocr_subir_factura(request):
+    """
+    Vista unificada: 
+    - Subir la factura
+    - Extraer datos con OCR
+    - Precargar el formulario
+    """
+    # if request.method == "POST" and request.FILES.get("imagen"):
+    if request.method == "POST":
+        imagen = request.FILES["imagen"]
+
+        # Guardar imagen temporal
+        temp_path = f"temp_{imagen.name}"
+        with open(temp_path, "wb+") as destino:
+            for chunk in imagen.chunks():
+                destino.write(chunk)
+
+        try:
+            resultado = procesar_ocr_api(temp_path)
+
+            # Extraer campos importantes
+            numero_factura = extraer_numero_factura(resultado)
+            fecha_emision_sin_parsear = extraer_fecha_emision(resultado).split('/')
+            importe_total = extraer_importe_total(resultado)
+            
+            fecha_emision = f'{fecha_emision_sin_parsear[2]}-{fecha_emision_sin_parsear[1]}-{fecha_emision_sin_parsear[0]}'
+
+            # Crear formulario precargado con datos OCR
+            form = CrearFactura(initial={
+                "NFactura": numero_factura,
+                "Comprobante": fecha_emision,
+                "Total": importe_total,
+            }, user=request.user)
+
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+            
+            print(form)
+
+            return render(request, "cargar_facturas.html", {"form": form})
+
+        except Exception as e:
+            print("ERROR EN OCR:", str(e))
+            return JsonResponse({"error": str(e)}, status=500)
+
+    # GET → mostrar formulario vacío
+    form = CrearFactura(user=request.user)
+    return render(request, "ocr.html", {"form": form})

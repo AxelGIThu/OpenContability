@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Texto extraído con OCR</h2>
+<pre>{{ text }}</pre>
+<div class="centrar_boton">
+        <a href="{% url 'cargar_facturas' %}" <button type="submit">Procesar otra imagen</button></a>
+    </div>
+{% endblock %}
