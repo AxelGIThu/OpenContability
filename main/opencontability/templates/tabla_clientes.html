@@ -1,49 +1,56 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}OpenContability - CargarClientes{% endblock %}
-<title>OpenContability - Tabla Clientes</title>
+{% block title %}OpenContability - Tabla Clientes{% endblock %}
 
 {% block head_extra %}
-    <link rel="stylesheet" href="{% static 'styles/tabla_clientes.css' %}">
-    <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+<link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+<link rel="stylesheet" href="{% static 'styles/tabla_clientes.css' %}">
+<script src="{% static 'javascript/tabla_clientes.js' %}" defer></script>
 {% endblock %}
 
-<body>
 {% block content %}
-    <h1>Tabla Clientes</h1>
+  <div class="page-wrap">
+    <h1 class="page-title">Tabla de Clientes</h1>
 
-    {% if clientes.query %}
-    <table class="clase_tabla" border="4">
+    {% if clientes %}
+      <table class="clase_tabla" aria-describedby="clientes-desc">
+        <caption id="clientes-desc">Listado de clientes registrados en el sistema</caption>
         <thead>
-            <tr>
-                <td>#</td>
-                <td>Nombre</td>
-                <td>CUIT</td>
-                <td>IVA</td>
-            </tr>
+          <tr>
+            <th class="thead-unido" colspan="5" scope="col">LISTADO DE CLIENTES</th>
+          </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">CUIT</th>
+            <th scope="col">Condición IVA</th>
+            <th scope="col">Opciones</th>
+          </tr>
         </thead>
         <tbody>
-        {% for cliente in clientes %}
-        <tr>
-            <td>{{ cliente.IDCliente }}</td>
+          {% for cliente in clientes %}
+          <tr>
+            <td scope="row">{{ cliente.IDCliente }}</td>
             <td>{{ cliente.nombre }}</td>
             <td>{{ cliente.CUIT }}</td>
             <td>{{ cliente.IVA }}</td>
-            <td><a href="{% url 'modificar_clientes' cliente.IDCliente %}">Modificar</a></td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td>No</td>
-            <td>Hay</td>
-            <td>registros</td>
-            <td>cargados.</td>
-        </tr>
-        {% endfor %}
+            <td>
+              <a class="action-link" href="{% url 'modificar_clientes' cliente.IDCliente %}">Modificar</a>
+            </td>
+          </tr>
+          {% endfor %}
         </tbody>
-    </table>
-    {% endif %} 
-
+      </table>
+    {% else %}
+      <table class="clase_tabla">
+        <caption>No hay clientes cargados</caption>
+        <tbody>
+          <tr class="empty-row">
+            <td colspan="5">No se han encontrado registros.</td>
+          </tr>
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
 {% endblock %}
-</body>
-</html>

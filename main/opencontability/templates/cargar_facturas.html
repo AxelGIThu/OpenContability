@@ -1,32 +1,47 @@
-
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}OpenContability - CargarClientes{% endblock %}
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        {% block head_extra %}
-            <link rel="stylesheet" href="{% static 'styles/cargar_facturas.css' %}">
-            <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
-        {% endblock %}
-    </head>
-    <body>
+{% block title %}OpenContability - Cargar Facturas{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'styles/cargar_facturas.css' %}">
+<link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+<link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+{% endblock %}
+
 {% block content %}
-<div class="titulo_central">
-<h1>Cargar Facturas</h1>
+<div class="cargar_facturas">
+    <h1>Cargar Facturas</h1>
+    <form class="container-cargar_facturas" action="{% url 'cargar_facturas' %}" method="post">
+        {% csrf_token %}
+        <div class="centrar_facturas">
+            {{ form.as_p }}
+            <div class="centrar_boton">
+                <button class="enviar_formulario" type="submit">Cargar</button>
+                <a href="{% url 'ocr' %}">OCR</button></a>
+            </div>
+        </div>
+    </form>
 </div>
-<div class="cargar-facturas">
-<form class="container-cargar_facturas" action="{% url 'cargar_facturas' %}" method="post">
-    {% csrf_token %}
-<div class="centrar_facturas grid-form">
-    {{ form.as_p }}
-    <div class="centrar_boton">
-        <button type="submit">Cargar</button>
-    </div>
+
+<!-- Toast de notificaciones -->
+<div class="contenedor-toast" id="contenedor-toast">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="toast autoCierre {{ message.tags }}">
+                <div class="contenido">
+                    <div class="icono campana-animada" aria-hidden="true">🔔</div>
+                    <div>
+                        <p class="titulo">{{ message }}</p>
+                    </div>
+                </div>
+                <button class="btn-cerrar" onclick="cerrarToast(this)" aria-label="Cerrar notificación">
+                    <span class="icono">✖</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
 </div>
-</form>
-</div>
-{% endblock  %}
-</body>
-</html>
+
+<script src="{% static 'javascript/notificaciones.js' %}" defer></script>
+{% endblock %}

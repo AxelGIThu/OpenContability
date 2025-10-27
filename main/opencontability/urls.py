@@ -28,10 +28,14 @@ urlpatterns = [
     path("facturas", views.index_facturas, name="facturas"),
     path("facturas/cargar_factura", views.cargar_facturas, name="cargar_facturas"),
     path("facturas/tabla_facturas", views.tabla_facturas, name="tabla_facturas"),
-    path("facturas/tabla_facturas/modificar_facturas/<int:primary_key>", views.modificar_facturas, name="modificar_facturas"),
+    path("facturas/tabla_facturas/modificar_facturas/<str:primary_key>", views.modificar_facturas, name="modificar_facturas"),
     ###########
 
     # Generar Archivos
     path("generar_archivos", views.generar_archivos, name="generar_archivos"),
+    ###########
+
+    # OCR
+    path('ocr/', views.ocr_subir_factura, name='ocr'),
     ###########
 ]

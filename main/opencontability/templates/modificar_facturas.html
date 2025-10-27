@@ -1,8 +1,26 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
+{% block title %}OpenContability - Modificar Facturas{% endblock %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'styles/modificar_facturas.css' %}">
+
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+    <script src="{% static 'javascript/modificar_clientes.js' %}" defer></script>
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+
+<body>
 {% block content %}
-
-    <h1>Cargar Clientes</h1>
+    <h1>Modificar Facturas</h1>
 
     <form action="{% url 'modificar_facturas' factura.NFactura %}" method="post">
 

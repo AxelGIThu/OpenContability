@@ -77,3 +77,16 @@ toggleBtn.addEventListener("click", () => {
     span.classList.toggle("oculto");
   });
 });
+
+// Cargar el estado del modo oscuro desde localStorage
+  document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("modoOscuro") === "activado") {
+      document.body.classList.add("dark");
+    }
+  });
+
+  function toggleModoOscuro() {
+    document.body.classList.toggle("dark");
+    const estado = document.body.classList.contains("dark") ? "activado" : "desactivado";
+    localStorage.setItem("modoOscuro", estado);
+  }

@@ -1,18 +1,46 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}OpenContability - CargarClientes{% endblock %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'styles/modificar_clientes.css' %}">
+
+    <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
+    <script src="{% static 'javascript/modificar_clientes.js' %}" defer></script>
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">
+
+{% endblock %}
 
 {% block content %}
-
-    <h1>Cargar Clientes</h1>
-
+<div class="form-card-wrapper">
     <form action="{% url 'modificar_clientes' cliente.IDCliente %}" method="post">
+        <div class="titulo-cliente">
+        <ion-icon name="person-add" class="icon-person"></ion-icon>
+        <ion-icon name="refresh" class="icon-refresh"></ion-icon>
+        <h1>Modificar Clientes</h1>
+        </div>
 
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button>Modificar</button>
+        <div class="contenedor-clientes">
+            {% csrf_token %}
+            {{ form.as_p }}
 
+            <div class="botones-container">
+                <ul>
+                    <li>
+                        <button type="submit" class="btn btn-primary">Modificar</button>
+                    </li>
+                    <li>
+                        <a href="{% url 'tabla_clientes' %}" class="btn btn-secondary">Volver</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </form>
-
-    <br>
-
-    <a class="anchor" href="{% url 'tabla_clientes' %}">Volver</a>
-{% endblock  %}
+</div>
+{% endblock %}

@@ -1,121 +1,176 @@
-/* Fuente moderna (puede usarse con import desde Google Fonts si querés) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+/* /static/styles/cargar_clientes.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #0023bd, #006f83);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    color: #333;
-    transition: background 0.3s, color 0.3s;
-}
-body:not(.modo-oscuro) {
-    background: linear-gradient(to right, #496e7c, #364855);
-    color: #333;
+:root {
+  --azul-profundo:#1a237e;
+  --azul-cielo:#76caff;
+  --verde:#3ab65c;
+  --verde-hover:#2d8a46;
+  --rojo:#bf333b;
+  --naranja:#bc8c12;
+  --gris-fondo:#f7f9fc;
+  --texto:#2c2c2c;
+  --radius:12px;
+  --shadow:0 6px 20px rgba(0,0,0,0.12);
 }
 
-body.modo-oscuro {
-    background: #121212;
-    color: #e0e0e0;
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Poppins',sans-serif;}
+
+/* Background + dark mode */
+body{
+  background:var(--gris-fondo);
+  color:var(--texto);
+  transition:background .3s,color .3s;
 }
-.container-formulario_cargarclientes {
-    background-color: white;
+body.modo-oscuro{
+  background:#0f1216;
+  color:#e9eef7;
 }
 
-body.modo-oscuro .container-formulario_cargarclientes {
-    background-color: #1e1e1e;
+/* TITULO */
+h1{
+  margin-top:20px;
+  text-align:center;
+  font-size:2rem;
+  font-weight:600;
+  color:var(--azul-profundo);
 }
-body.modo-oscuro .container-formulario_cargarclientes label {
-    color: #ffffff;
+body.modo-oscuro h1{color:var(--azul-cielo);}
+
+/* FORM CARD */
+.container-formulario_cargarclientes{
+  background:#fff;
+  max-width:500px;
+  margin:30px auto;
+  padding:30px 24px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition:background .3s;
 }
-body.modo-oscuro .container-formulario_cargarclientes button {
-    background-color: white;
-    color: #000000;
-}
-h1 {
-    margin-top: 40px;
-    color: white;
-    font-size: 36px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    text-align: center;
+body.modo-oscuro .container-formulario_cargarclientes{
+  background:#1e1e1e;
 }
 
-.container-formulario_cargarclientes {
-    background-color: white;
-    padding: 40px 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 500px;
-    margin-top: 20px;
-
+.container-formulario_cargarclientes form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
 }
 
-.container-formulario_cargarclientes p {
-    margin-bottom: 20px;
+/* LABELS */
+.container-formulario_cargarclientes label{
+  font-weight:600;
+  margin-bottom:6px;
+  display:block;
+  color:#000;
 }
+body.modo-oscuro .container-formulario_cargarclientes label{color:#fff;}
 
-.container-formulario_cargarclientes label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #000000;
-}
-
+/* INPUTS */
 .container-formulario_cargarclientes input,
-.container-formulario_cargarclientes select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
+.container-formulario_cargarclientes select{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-size:0.95rem;
+  transition:border-color .25s, background .25s;
 }
-
 .container-formulario_cargarclientes input:focus,
-.container-formulario_cargarclientes select:focus {
-    border-color: #3498db;
-    outline: none;
+.container-formulario_cargarclientes select:focus{
+  border-color:var(--azul-cielo);
+  outline:none;
+}
+body.modo-oscuro .container-formulario_cargarclientes input,
+body.modo-oscuro .container-formulario_cargarclientes select{
+  background:#2a2a2a;
+  border:1px solid #555;
+  color:#fff;
 }
 
-button {
-    width: 100%;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    font-family: 'poppins',sans-serif;
+/* BOTÓN */
+.container-formulario_cargarclientes-button{
+  width:100%;
+  background-color: #00006e;
+  color:#fff;
+  border:none;
+  padding:12px;
+  font-size:1rem;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition:background .3s, transform .2s;
+}
+.container-formulario_cargarclientes-button:hover{
+  background:var(--verde-hover);
+  transform:translateY(-2px);
+}
+body.modo-oscuro .container-formulario_cargarclientes-button{
+  background:var(--azul-cielo);
+  color:#000;
 }
 
-button:hover {
-    background-color: #2980b9;
+/* TOASTS */
+.contenedor-toast{
+  position:fixed;
+  top:20px;
+  right:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index:9999;
+}
+.toast{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-width:280px;
+  max-width:360px;
+  padding:14px 16px;
+  border-radius:var(--radius);
+  font-size:0.9rem;
+  background:#fff;
+  color:var(--texto);
+  border-left:6px solid var(--azul-cielo);
+  box-shadow:var(--shadow);
+  animation:slideIn .4s ease forwards;
+}
+.toast.success{border-left-color:var(--verde);}
+.toast.error{border-left-color:var(--rojo);}
+.toast.warning{border-left-color:var(--naranja);}
+body.modo-oscuro .toast{
+  background:#1e1e1e;
+  color:#fff;
+  box-shadow:0 4px 12px rgba(255,255,255,0.08);
+}
+.toast.cerrando{animation:slideOut .4s ease forwards;}
+
+/* CLOSE BTN */
+.toast .btn-cerrar{
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+  margin-left:12px;
+  transition:transform .2s ease;
+  color:inherit;
+}
+.toast .btn-cerrar:hover{transform:scale(1.2);}
+
+/* ICONO CAMPANA */
+.campana-animada{
+  margin-right:10px;
+  animation:campanaMovimiento 1s ease-in-out infinite;
 }
 
-/* Navegación volver */
-.navegacion-volver_container {
-    margin-top: 20px;
-}
-
-.anchor {
-    background-color: #00ce56da;
-    padding: 4px 10px;
-    text-decoration: none;
-    color: rgb(122, 122, 122);
-    font-weight: bold;
-    border-radius: 7px;
-    transition: background-color 0.3s;
-}
-
-.anchor:hover {
-    background-color: #2aa15cda;
+/* Animaciones */
+@keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+@keyframes slideOut{from{transform:translateX(0);opacity:1;}to{transform:translateX(100%);opacity:0;}}
+@keyframes campanaMovimiento{
+  0%{transform:rotate(0);}
+  25%{transform:rotate(15deg);}
+  50%{transform:rotate(-15deg);}
+  75%{transform:rotate(10deg);}
+  100%{transform:rotate(0);}
 }

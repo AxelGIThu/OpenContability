@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Subir imagen para OCR</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="imagen" accept="image/*" required>
+    <button type="submit">Procesar</button>
+</form>
+{% endblock %}

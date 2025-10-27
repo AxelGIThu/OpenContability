@@ -1,171 +1,148 @@
+/* Fuente moderna */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root {
-  --color-fondo-claro: rgb(2, 2, 80);
-  --color-texto-claro: #333;
-  --color-fondo-oscuro: #121212;
-  --color-texto-oscuro: #e0e0e0;
-  --color-formulario-claro: #ffffff;
-  --color-formulario-oscuro: #1e1e1e;
-  --color-label-oscuro: #ffffff;
-  --color-btn-oscuro-hover: #fffbfb;
-  --color-btn-oscuro-hover-text: #000000;
+    --exito: #4CAF50;      /* Verde */
+    --error: #F44336;      /* Rojo */
+    --info: #2196F3;       /* Azul */
+    --warning: #FF9800;    /* Naranja */
+    --color_fondo: #006f8e; /* Fondo principal */
+    --gris-fondo: #888;
+    --blanco: #fff;
 }
-
+html, body {
+    min-height: 100vh;
+    overflow-y: auto; /* o scroll */
+}
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  background-color: var(--color-fondo-claro);
-  color: var(--color-texto-claro);
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color_fondo);
+    color: var(--blanco);
 }
 
-body.modo-oscuro {
-  background-color: var(--color-fondo-oscuro);
-  color: var(--color-texto-oscuro);
+/* ================== FORMULARIO ================== */
+.cargar_facturas {
+    max-width: 600px;
+    background-color: var(--gris-fondo);
+    border-radius: 20px;
+    margin: 2rem auto;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.377);
+    text-align: center;
+    
+}
+/* Boton de enviar */ 
+.enviar_formulario {
+    width: 90%;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--info);
+    margin-top: 1rem;
+    color: var(--blanco);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
 }
 
-/* Estilo del contenedor del formulario */
-.container-formulario_cargarclientes {
-  background-color: var(--color-formulario-claro);
+.enviar_formulario:hover {
+    background-color: #0b7dda;
+    cursor: pointer;
 }
 
-body.modo-oscuro .container-formulario_cargarclientes {
-  background-color: var(--color-formulario-oscuro);
+.centrar_facturas {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
 
-body.modo-oscuro .container-formulario_cargarclientes label {
-  color: var(--color-label-oscuro);
+label {
+    font-size: 18px;
+    color: var(--blanco);
+    margin-bottom: 0.3rem;
+    text-align: left;
 }
 
-body.modo-oscuro .container-formulario_cargarclientes button {
-  background-color: white;
-  color: black;
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    outline: none;
 }
 
-/* Título */
-h1 {
-  color: white;
-  font-size: 36px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  line-height: 20px;
+/* ================== TOAST ================== */
+.contenedor-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
 }
 
-/* Caja principal de carga de facturas */
-.cargar-facturas {
-  background-color: rgb(1, 2, 92);
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
-  padding: 2px;
-  border-radius: 10px;
-  width:800px;
+.toast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--blanco);
+    border-left: 5px solid var(--info);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    animation: aparecer 0.5s ease;
+    min-width: 250px;
 }
 
-body.modo-oscuro .cargar-facturas {
-  background-color: rgb(255, 255, 255);
+.toast.success { border-left-color: var(--exito); }
+.toast.error { border-left-color: var(--error); }
+.toast.info { border-left-color: var(--info); }
+.toast.warning { border-left-color: var(--warning); }
+
+body.modo-oscuro .toast {
+    background: #000;
+    color: var(--blanco);
 }
 
-.cargar-facturas p {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 5px;
-  margin: 5px 0;
-}
-.cargar-facturas label {
-  width: 50%;
-  text-align: left;
-  margin-left: 1.5rem;
-  font-size: 0.9rem;
-  color: rgb(255, 255, 255);
-}
-body.modo-oscuro .cargar-facturas label {
-  color: rgb(0, 0, 0);
+.toast.cerrando {
+	animation: slideOut 0.5s forwards ease-in-out;
+	opacity: 0;
 }
 
-.cargar-facturas input,
-.cargar-facturas textarea {
-  width: 50%;
-  padding: 0.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-family: 'Poppins', sans-serif;
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.cargar-facturas select {
-  width:55%;
-  padding: 0.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-family: 'Poppins', sans-serif;
+@keyframes slideOut {
+	from { transform: translateX(0); opacity: 1; }
+	to { transform: translateX(120%); opacity: 0; }
 }
 
-/* Botón centrado */
-.centrar_boton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  grid-column: 1 / -1;
-  text-align: center;
-  margin-top: 1rem;
+/* ================== BOTÓN CERRAR ================== */
+.btn-cerrar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+    transition: color 0.3s ease;
+}
+.btn-cerrar:hover {
+    color: var(--error);
 }
 
-.centrar_boton button {
-  padding: 10px;
-  width: 100%;
-  font-size: 1.2rem;
-  border-radius: 10px;
-  font-family: 'Poppins', sans-serif;
+/* ================== CAMPANITA ================== */
+.campana-animada {
+    display: inline-block; /* Asegura que se pueda animar correctamente */
+    animation: campanaMovimiento 1s ease-in-out infinite;
 }
 
-.centrar_boton button:hover {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-body.modo-oscuro .centrar_boton button:hover {
-  background-color: var(--color-btn-oscuro-hover);
-  color: var(--color-btn-oscuro-hover-text);
-}
-
-/* Botón o enlace Navegación Barra Lateral */
-.anchor {
-  background-color:#355d3f;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  border-radius: 7px;
-  padding:6px 12px;
-  transition: background-color 0.3s;
-}
-/* Submenú */
-.sub-menu-link{
-  background-color:#67AB78;
-  text-decoration: none;
-  color: white;
-  margin-top:5px;
-  border-radius: 7px;
-  padding:6px;
-  transition: background-color 0.3s;
-}
-.anchor:hover {
-  background-color: #2aa15cda;
-}
-
-/* Formulario en grid */
-.grid-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.grid-form p {
-  margin: 0.5rem;
-}
-.grid-form label {
-  font-size: 1.2rem;
+@keyframes campanaMovimiento {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-2px); }
 }
