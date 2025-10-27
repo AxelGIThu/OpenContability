@@ -115,6 +115,8 @@ def cargar_facturas(request):
             varFactura.save()
             form = CrearFactura(user=request.user)
             return render(request, "cargar_facturas.html", { 'form' : form })
+            form = CrearFactura(user=request.user)
+            return render(request, "cargar_facturas.html", { 'form' : form })
     
     else:
         # Crea un objeto con el formulario para el HTML.
@@ -166,6 +168,7 @@ def modificar_facturas(request, primary_key):
         form = CrearFactura(request.POST, instance=factura, user=request.user.id)
         if form.is_valid():
             factura = form.save()
+            factura = form.save()
             return redirect('tabla_facturas')
     return render(request, "modificar_facturas.html", { 'form' : form, 'factura' : factura})
 
@@ -194,8 +197,10 @@ def generar_archivos(request):
                 libro = xlsxwriter.Workbook(output, {'in_memory': True})
                 hoja = libro.add_worksheet('Libro')
                 date_format = libro.add_format({'num_format': 'dd/mm/yyyy'})
+                date_format = libro.add_format({'num_format': 'dd/mm/yyyy'})
 
                 # Encabezado
+                columnas = ['Numero de Factura', 'Movimiento', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'Tipo de Imputación', 'Empresa', 'Cliente', 'Neto10y5', 'IVA10y5', 'Neto21', 'IVA21', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Otros', 'Total']
                 columnas = ['Numero de Factura', 'Movimiento', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'Tipo de Imputación', 'Empresa', 'Cliente', 'Neto10y5', 'IVA10y5', 'Neto21', 'IVA21', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Otros', 'Total']
                 contador_columnas = 0
                 for columna in columnas:
@@ -206,6 +211,9 @@ def generar_archivos(request):
                 fila = 1
                 for dato in datos:
                     hoja.write(fila, 0, dato.NFactura)
+                    hoja.write(fila, 1, dato.Movimiento)
+                    hoja.write(fila, 2, dato.Comprobante, date_format)
+                    hoja.write(fila, 3, dato.Procesamiento, date_format)
                     hoja.write(fila, 1, dato.Movimiento)
                     hoja.write(fila, 2, dato.Comprobante, date_format)
                     hoja.write(fila, 3, dato.Procesamiento, date_format)
@@ -225,8 +233,26 @@ def generar_archivos(request):
                     hoja.write(fila, 17, dato.PercepcionMunicipalidad)
                     hoja.write(fila, 18, dato.Otros)
                     hoja.write(fila, 19, dato.Total)
+                    hoja.write(fila, 5, dato.TImputacion)
+                    hoja.write(fila, 6, dato.Empresa.CUIT)
+                    hoja.write(fila, 7, dato.Cliente.CUIT)
+                    hoja.write(fila, 8, dato.Neto10y5)
+                    hoja.write(fila, 9, dato.IVA10y5)
+                    hoja.write(fila, 10, dato.Neto21)
+                    hoja.write(fila, 11, dato.IVA21)
+                    hoja.write(fila, 12, dato.Neto27)
+                    hoja.write(fila, 13, dato.IVA27)
+                    hoja.write(fila, 14, dato.ConceptoNoAgrabado)
+                    hoja.write(fila, 15, dato.PercepcionIVA)
+                    hoja.write(fila, 16, dato.PercepcionDGR)
+                    hoja.write(fila, 17, dato.PercepcionMunicipalidad)
+                    hoja.write(fila, 18, dato.Otros)
+                    hoja.write(fila, 19, dato.Total)
                     fila+=1
                 fila+=1
+                hoja.write(fila, 7, 'Totales')
+                hoja.write(fila, 8, f'=SUM(I2:I{fila})')
+                hoja.write(fila, 9, f'=SUM(J2:J{fila})')
                 hoja.write(fila, 7, 'Totales')
                 hoja.write(fila, 8, f'=SUM(I2:I{fila})')
                 hoja.write(fila, 9, f'=SUM(J2:J{fila})')
@@ -261,6 +287,7 @@ def generar_archivos(request):
                 # Encabezado
                 # columnas = ['NumFactura', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'NumComprobante', 'Movimiento', 'Tipo de Imputacion', 'CUIT', 'Cliente', 'Comerciante', 'Importe', 'Neto21', 'IVA21', 'Neto10y5', 'IVA10y5', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Total']
                 columnas = ['CUIT', 'Numero de Factura', 'Tipo de Comprobante', 'Comprobante', 'Importe']
+                columnas = ['CUIT', 'Numero de Factura', 'Tipo de Comprobante', 'Comprobante', 'Importe']
                 writer.writerow(columnas)
 
                 # Datos
@@ -268,8 +295,11 @@ def generar_archivos(request):
                     writer.writerow([
                         dato.Empresa.CUIT,
                         dato.NFactura,
+                        dato.Empresa.CUIT,
+                        dato.NFactura,
                         dato.TComprobante,
                         dato.Comprobante,
+                        dato.Total
                         dato.Total
                     ])
 
@@ -348,3 +378,111 @@ def ocr_subir_factura(request):
 
 # UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf3 in position 85: invalid continuation byte
 # Esta mal la clave de la base de datos o el archivo setting.py
+
+import os
+import re
+from django.shortcuts import render
+from django.http import JsonResponse
+from .services import procesar_ocr_api
+
+
+
+
+def normalizar_importe(importe_str):
+    if not importe_str:
+        return None
+    limpio = importe_str.replace(".", "").replace(",", ".")
+    return limpio
+
+
+
+
+
+def extraer_numero_factura(texto):
+    match = re.search(r"Nro\.?\s*Comp[:\s-]*([0-9]{4}-[0-9]{8})", texto, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+    return None
+
+
+
+def extraer_fecha_emision(texto):
+    match = re.search(
+        r"Fecha\s+de\s+Emisi[oó]n[:\s-]*([0-9]{2}[/-][0-9]{2}[/-][0-9]{4})",
+        texto,
+        re.IGNORECASE
+    )
+    return match.group(1).strip() if match else None
+
+
+
+def extraer_importe_total(texto):
+    """
+    Busca el campo 'Importe Total' en el texto del OCR
+    y devuelve solo el último número que aparece después.
+    """
+    lineas = texto.splitlines()
+    # Encontrar la línea que contiene "Importe Total"
+    for i, linea in enumerate(lineas):
+        if "Importe Total" in linea:
+            # Tomar todas las líneas siguientes
+            siguientes = lineas[i+1:i+10]  # mira las próximas 10 líneas por si hay saltos
+            numeros = []
+            for lin in siguientes:
+                numeros += re.findall(r"[\d\.,]+", lin)
+            if numeros:
+                # Tomamos solo el último número como Importe Total real
+                return normalizar_importe(numeros[-1])
+    return None
+
+
+
+
+def ocr_subir_factura(request):
+    """
+    Vista unificada: 
+    - Subir la factura
+    - Extraer datos con OCR
+    - Precargar el formulario
+    """
+    # if request.method == "POST" and request.FILES.get("imagen"):
+    if request.method == "POST":
+        imagen = request.FILES["imagen"]
+
+        # Guardar imagen temporal
+        temp_path = f"temp_{imagen.name}"
+        with open(temp_path, "wb+") as destino:
+            for chunk in imagen.chunks():
+                destino.write(chunk)
+
+        try:
+            resultado = procesar_ocr_api(temp_path)
+
+            # Extraer campos importantes
+            numero_factura = extraer_numero_factura(resultado)
+            fecha_emision_sin_parsear = extraer_fecha_emision(resultado).split('/')
+            importe_total = extraer_importe_total(resultado)
+            
+            fecha_emision = f'{fecha_emision_sin_parsear[2]}-{fecha_emision_sin_parsear[1]}-{fecha_emision_sin_parsear[0]}'
+
+            # Crear formulario precargado con datos OCR
+            form = CrearFactura(initial={
+                "NFactura": numero_factura,
+                "Comprobante": fecha_emision,
+                "Total": importe_total,
+            }, user=request.user)
+
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+            
+            print(form)
+
+            return render(request, "cargar_facturas.html", {"form": form})
+
+        except Exception as e:
+            print("ERROR EN OCR:", str(e))
+            return JsonResponse({"error": str(e)}, status=500)
+
+    # GET → mostrar formulario vacío
+    form = CrearFactura(user=request.user)
+    return render(request, "ocr.html", {"form": form})

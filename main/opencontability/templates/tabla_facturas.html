@@ -23,7 +23,7 @@
             <tbody>
                 {% for factura in facturas %}
                 <tr>
-                    {% for columna in columnas%}    
+                    {% for columna in columnas%}
                             <td>{{ factura|get_attr:columna }}</td>
                     {% endfor%}
                     <td><a href="{% url 'modificar_facturas' factura.NFactura %}">Modificar</a></td>
