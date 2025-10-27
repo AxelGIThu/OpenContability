@@ -197,10 +197,8 @@ def generar_archivos(request):
                 libro = xlsxwriter.Workbook(output, {'in_memory': True})
                 hoja = libro.add_worksheet('Libro')
                 date_format = libro.add_format({'num_format': 'dd/mm/yyyy'})
-                date_format = libro.add_format({'num_format': 'dd/mm/yyyy'})
 
                 # Encabezado
-                columnas = ['Numero de Factura', 'Movimiento', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'Tipo de Imputación', 'Empresa', 'Cliente', 'Neto10y5', 'IVA10y5', 'Neto21', 'IVA21', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Otros', 'Total']
                 columnas = ['Numero de Factura', 'Movimiento', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'Tipo de Imputación', 'Empresa', 'Cliente', 'Neto10y5', 'IVA10y5', 'Neto21', 'IVA21', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Otros', 'Total']
                 contador_columnas = 0
                 for columna in columnas:
@@ -287,7 +285,6 @@ def generar_archivos(request):
                 # Encabezado
                 # columnas = ['NumFactura', 'Comprobante', 'Procesamiento', 'Tipo de Comprobante', 'NumComprobante', 'Movimiento', 'Tipo de Imputacion', 'CUIT', 'Cliente', 'Comerciante', 'Importe', 'Neto21', 'IVA21', 'Neto10y5', 'IVA10y5', 'Neto27', 'IVA27', 'ConceptoNoAgrabado', 'PercepcionIVA', 'PercepcionDGR', 'PercepcionMunicipalidad', 'Total']
                 columnas = ['CUIT', 'Numero de Factura', 'Tipo de Comprobante', 'Comprobante', 'Importe']
-                columnas = ['CUIT', 'Numero de Factura', 'Tipo de Comprobante', 'Comprobante', 'Importe']
                 writer.writerow(columnas)
 
                 # Datos
@@ -299,7 +296,6 @@ def generar_archivos(request):
                         dato.NFactura,
                         dato.TComprobante,
                         dato.Comprobante,
-                        dato.Total
                         dato.Total
                     ])
 
@@ -450,7 +446,7 @@ def ocr_subir_factura(request):
         imagen = request.FILES["imagen"]
 
         # Guardar imagen temporal
-        temp_path = f"temp_{imagen.name}"
+        temp_path = f"opencontability/images/temp_{imagen.name}"
         with open(temp_path, "wb+") as destino:
             for chunk in imagen.chunks():
                 destino.write(chunk)
@@ -474,8 +470,6 @@ def ocr_subir_factura(request):
 
             if os.path.exists(temp_path):
                 os.remove(temp_path)
-            
-            print(form)
 
             return render(request, "cargar_facturas.html", {"form": form})
 
