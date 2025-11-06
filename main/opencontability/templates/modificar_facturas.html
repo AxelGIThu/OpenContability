@@ -17,20 +17,40 @@
 
 {% endblock %}
 
-
-<body>
 {% block content %}
+<div class="cargar_facturas">
     <h1>Modificar Facturas</h1>
-
-    <form action="{% url 'modificar_facturas' factura.NFactura %}" method="post">
-
+    <form class="container-modificar_facturas" action="{% url 'modificar_facturas' factura.NFactura %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button>Modificar</button>
 
+        <div class="container-formulario_cargarclientes">
+            {{ form.as_p }}
+            <div class="centrar_boton">
+                <button class="container-formulario_cargarclientes-button" type="submit">Modificar</button>
+                <a href="{% url 'tabla_facturas' %}" class="btn btn-secondary">Volver</button></a>
+            </div>
+        </div>
     </form>
+</div>
 
-    <br>
+<!-- Toast de notificaciones -->
+<div class="contenedor-toast" id="contenedor-toast">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="toast autoCierre {{ message.tags }}">
+                <div class="contenido">
+                    <div class="icono campana-animada" aria-hidden="true">🔔</div>
+                    <div>
+                        <p class="titulo">{{ message }}</p>
+                    </div>
+                </div>
+                <button class="btn-cerrar" onclick="cerrarToast(this)" aria-label="Cerrar notificación">
+                    <span class="icono">✖</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
 
-    <a class="anchor" href="{% url 'tabla_facturas' %}">Volver</a>
-{% endblock  %}
+<script src="{% static 'javascript/notificaciones.js' %}" defer></script>
+{% endblock %}

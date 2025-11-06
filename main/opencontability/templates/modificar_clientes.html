@@ -5,9 +5,9 @@
 
 {% block head_extra %}
     <link rel="stylesheet" href="{% static 'styles/modificar_clientes.css' %}">
-
+<!-- 
     <link rel="stylesheet" href="{% static 'styles/menu.css' %}">
-
+ -->
     <link rel="shortcut icon" href="{% static 'media/oc_logo.ico' %}" type="image/x-icon">
     <script src="{% static 'javascript/modificar_clientes.js' %}" defer></script>
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -21,24 +21,20 @@
 <div class="form-card-wrapper">
     <form action="{% url 'modificar_clientes' cliente.IDCliente %}" method="post">
         <div class="titulo-cliente">
-        <ion-icon name="person-add" class="icon-person"></ion-icon>
-        <ion-icon name="refresh" class="icon-refresh"></ion-icon>
+
         <h1>Modificar Clientes</h1>
         </div>
 
-        <div class="contenedor-clientes">
+        <div class="container-formulario_cargarclientes">
             {% csrf_token %}
             {{ form.as_p }}
 
-            <div class="botones-container">
-                <ul>
-                    <li>
-                        <button type="submit" class="btn btn-primary">Modificar</button>
-                    </li>
-                    <li>
+            <div class="container-formulario_cargarclientes">
+
+                        <button class="container-formulario_cargarclientes-button">Modificar</button>
+
                         <a href="{% url 'tabla_clientes' %}" class="btn btn-secondary">Volver</a>
-                    </li>
-                </ul>
+
             </div>
         </div>
     </form>

@@ -14,11 +14,12 @@
     <h1>Cargar Facturas</h1>
     <form class="container-cargar_facturas" action="{% url 'cargar_facturas' %}" method="post">
         {% csrf_token %}
-        <div class="centrar_facturas">
+
+        <div class="container-formulario_cargarclientes">
             {{ form.as_p }}
             <div class="centrar_boton">
-                <button class="enviar_formulario" type="submit">Cargar</button>
-                <a href="{% url 'ocr' %}">OCR</button></a>
+                <button class="container-formulario_cargarclientes-button" type="submit">Cargar</button>
+                <a href="{% url 'ocr' %}" class="btn btn-secondary">OCR</button></a>
             </div>
         </div>
     </form>
